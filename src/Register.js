@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import {
   MDBContainer,
   MDBCol,
@@ -8,6 +7,7 @@ import {
   MDBInput
 } from 'mdb-react-ui-kit';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function Register() {
     const [email, setEmail] = useState('');
@@ -71,18 +71,20 @@ function Register() {
     }
 
   return (
-    <MDBContainer fluid className="p-3 my-5">
+    <MDBContainer className="p-3 my-5">
       <MDBRow className="align-items-center">
         {/* Kolom untuk gambar */}
         <MDBCol col='12' md='6' className="d-flex justify-content-center">
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" className="img-fluid" alt="Phone image" />
+          <img src="https://pwa.siasn.kukarkab.com/assets/pwa/img/bg-img/36.png" className="img-fluid" alt="Phone image" />
         </MDBCol>
 
         {/* Kolom untuk inputan */}
         <MDBCol col='12' md='6'>
+          <h1 style={{ textAlign:"center", marginBottom:"3%" }}> <i> <u>REGISTRASI</u> </i></h1>
+        <h3 style={{ marginLeft:'5%', marginBottom:'5%' }}>Silahkan isi data Registrasi dibawah ini</h3>
           <MDBInput
-            wrapperClass='mb-4'
             label='Email address'
+            wrapperClass='mb-4'
             id='email'
             type='email'
             size="lg"

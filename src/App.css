@@ -36,3 +36,164 @@
     transform: rotate(360deg);
   }
 }
+
+/* css */
+.navbar-container {
+  overflow: hidden;
+}
+
+#content {
+  transition: margin-left 0.7s;
+}
+
+.content-open {
+  margin-left: 250px;
+}
+
+.logo {
+  width: 70px;
+  height: 60px;
+}
+
+.sidebar-title,
+.navbar-title {
+  color: white;
+  font-size: 15px;
+}
+
+.navbar-links {
+  display: flex;
+}
+
+.space {
+  margin-right: 20px;
+}
+#viewport {
+  padding-left: 0;
+  transition: all 0.5s ease;
+  position: relative;
+  margin: ;
+}
+
+#viewport.open #sidebar {
+  left: 0;
+}
+
+#viewport.open #content {
+  width: calc(100% - 550px);
+}
+
+#sidebar {
+  z-index: 1000;
+  position: fixed;
+  left: -250px;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  overflow-y: auto;
+  background: #333A73;
+  transition: left 0.5s ease;
+}
+
+#content {
+  width: 100%;
+  position: relative;
+  margin-right: 0;
+  transition: width 0.6s ease;
+}
+
+#sidebar header {
+  background-color: #333A73;
+  font-size: 20px;
+  line-height: 52px;
+  text-align: center;
+}
+
+#sidebar header a {
+  color: #fff;
+  text-decoration: none;
+}
+
+#sidebar header a:hover {
+  color: #fff;
+}
+
+#sidebar .nav a {
+  color: #cfd8dc;
+  font-size: 14px;
+  padding: 12px 24px;
+}
+
+#sidebar .nav a:hover {
+  color: #eceff1;
+  background-color: #455a64;
+}
+
+.btn-close {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  cursor: pointer;
+}
+
+.btn-close:hover {
+  color: #ccc;
+}
+
+.navbar {
+  background-color: #333A73;
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-navbar {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  margin: 0 40px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.btn-toggle {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  margin: 0 75px 0 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.btn-toggle:hover {
+  transform: scale(1.1);
+}
+
+.space {
+  margin: 0 10px;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.navbar-links a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.navbar-links a:hover {
+  color: #eceff1;
+}
+
+#sidebar .nav .active {
+  background-color: #333A73; /* Warna latar untuk item aktif */
+  color: #eceff1; /* Warna teks untuk item aktif */
+}
