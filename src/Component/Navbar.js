@@ -77,7 +77,7 @@ function Navbarcom() {
             <ul className="nav flex-column">
               {/* Sidebar items */}
               <li className="nav-item">
-                <a href="/" className="nav-link">
+                <a href="/dashboard" className="nav-link">
                   Dashboard
                 </a>
               </li>
@@ -147,7 +147,7 @@ function Navbarcom() {
             <div className="navbar-links">
               {!isOpen && (
                 <>
-                  <a href="/" className="space">
+                  <a href="/dashboard" className="space">
                     Dashboard
                   </a>
                   <a href="/guru" className="space">

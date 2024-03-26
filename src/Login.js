@@ -1,25 +1,40 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // Tambahkan import axios
+import Swal from 'sweetalert2'; // Tambahkan import SweetAlert
+import { navigate } from 'gatsby'; // Tambahkan import navigate jika menggunakan Gatsby
 import { MDBContainer, MDBCol, MDBRow, MDBBtn, MDBInput } from 'mdb-react-ui-kit';
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState(''); // Definisikan state untuk email
+  const [password, setPassword] = useState(''); // Definisikan state untuk password
 
-  const handleLogin = () => {
-    fetch('https://fakestoreapi.com/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: email,
-        password: password,
-      }),
-    })
-      .then(res => res.json())
-      .then(json => console.log(json))
-      .catch(error => console.error('Error:', error));
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const data = {
+      email: email,
+      password: password,
+    };
+
+    try {
+      const response = await axios.post("http://localhost:7070/login", data); // Menggunakan URL yang benar
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("role", response.data.userData.role);
+      navigate("/"); // Pastikan Anda memiliki navigate yang diimpor jika menggunakan Gatsby
+      console.log("success login");
+
+      // Tambahkan SweetAlert berhasil login di sini
+      Swal.fire({
+        icon: "success",
+        title: "Login Berhasil",
+        text: "Selamat datang!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
+
 
   return (
     <MDBContainer className="p-3">
@@ -51,7 +66,7 @@ function Login() {
 
           <div className="d-flex justify-content-between mx-4 mb-4">
             <a href="/forgot-password">Forgot Password</a>
-            <a href="/register">Belum punya akun? ayo Registerrasi dulu</a>
+            <a href="/daftar">Belum punya akun? ayo Registerrasi dulu</a>
           </div>
 
           <MDBBtn className="mb-4 w-100" size="lg" onClick={handleLogin}>Sign in</MDBBtn>

@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Table, Card, Form, Button } from "react-bootstrap"; // Impor Button dari react-bootstrap
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Impor FontAwesomeIcon dari @fortawesome/react-fontawesome
-import { faPenSquare, faTrashAlt } from "@fortawesome/free-solid-svg-icons"; // Impor icon dari @fortawesome/free-solid-svg-icons
+import { Table, Card } from "react-bootstrap"; // Impor Button dari react-bootstrap
 import axios from "axios";
 
 function Dashboard() {
   const [users, setUsers] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const getAll = () => {
@@ -21,10 +18,6 @@ function Dashboard() {
     };
     getAll();
   }, []);
-
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
 
   return (
     <>
@@ -52,7 +45,7 @@ function Dashboard() {
       >
         {/* Kartu */}
         <div style={{ gap: "4" }}>
-          <Card style={{ width: "24rem", height:"10rem" }}>
+          <Card style={{ width: "24rem", height:"10rem", background: "rgba(238, 153, 194, 0.7)" }}>
             <Card.Body>
               <Card.Title>Jumlah Siswa</Card.Title>
               <Card.Text>This is card content for card 1.</Card.Text>
@@ -61,7 +54,7 @@ function Dashboard() {
         </div>
 
         <div style={{ gap: "1" }}>
-          <Card style={{ width: "24rem", height:"10rem" }}>
+          <Card style={{ width: "24rem", height:"10rem", background: "rgba(238, 153, 194, 0.7)" }}>
             <Card.Body>
               <Card.Title>Guru</Card.Title>
               <Card.Text>This is card content for card 2.</Card.Text>
@@ -70,7 +63,7 @@ function Dashboard() {
         </div>
 
         <div style={{ gap: "1" }}>
-          <Card style={{ width: "24rem", height:"10rem" }}>
+          <Card style={{ width: "24rem", height:"10rem", background: "rgba(238, 153, 194, 0.7)" }}>
             <Card.Body>
               <Card.Title>Kelas</Card.Title>
               <Card.Text>This is card content for card 3.</Card.Text>
@@ -79,7 +72,7 @@ function Dashboard() {
         </div>
 
         <div style={{ gap: "1" }}>
-          <Card style={{ width: "24rem", height:"10rem" }}>
+          <Card style={{ width: "24rem", height:"10rem", background: "rgba(238, 153, 194, 0.7)" }}>
             <Card.Body>
               <Card.Title>Mapel</Card.Title>
               <Card.Text>This is card content for card 4.</Card.Text>
@@ -89,24 +82,14 @@ function Dashboard() {
       </div>
 
       {/* Tabel */}
-      <div style={{ margin: "10%" }}>
-        <Form>
-          <Form.Group controlId="formSearch" style={{ width: "10%" }}>
-            <Form.Control
-              type="text"
-              placeholder="Search"
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-          </Form.Group>
-        </Form>
+      <div style={{ marginBottom:"10%" }}>
         <Table
           striped
           bordered
           hover
           style={{
             marginTop: "8px",
-            marginLeft: "20px",
+            marginLeft: "35px",
             width: "calc(95% - 10px)",
           }}
         >

@@ -13,6 +13,10 @@ function Home() {
   const pinkTransparentColor = "rgba(238, 153, 194, 0.7)"; // Warna pink dengan tingkat transparansi
 
   return (
+    <div>
+      <div>
+
+      </div>
     <div style={backgroundStyle}>
       <div>
         <div
@@ -114,6 +118,7 @@ function Home() {
       <footer style={{ textAlign: "center", marginTop: "20px" }}>
         <p>&copy; 2024 Tugas Java.25 march Bootcamp.</p>
       </footer>
+    </div>
     </div>
   );
 }
