@@ -1,41 +1,44 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Tambahkan import axios
-import Swal from 'sweetalert2'; // Tambahkan import SweetAlert
-import { navigate } from 'gatsby'; // Tambahkan import navigate jika menggunakan Gatsby
+import axios from 'axios';
+import Swal from 'sweetalert2';
 import { MDBContainer, MDBCol, MDBRow, MDBBtn, MDBInput } from 'mdb-react-ui-kit';
+import { useHistory } from "react-router-dom";
 
 function Login() {
-  const [email, setEmail] = useState(''); // Definisikan state untuk email
-  const [password, setPassword] = useState(''); // Definisikan state untuk password
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const history = useHistory();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const data = {
-      email: email,
-      password: password,
-    };
-
-    try {
-      const response = await axios.post("http://localhost:7070/login", data); // Menggunakan URL yang benar
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("role", response.data.userData.role);
-      navigate("/"); // Pastikan Anda memiliki navigate yang diimpor jika menggunakan Gatsby
-      console.log("success login");
-
-      // Tambahkan SweetAlert berhasil login di sini
-      Swal.fire({
-        icon: "success",
-        title: "Login Berhasil",
-        text: "Selamat datang!",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    axios.get("http://localhost:8080/login").then(({ data }) => {
+      const user = data.find(
+        (x) => x.username === username && x.password === password
+      );
+      if (user) {
+        Swal.fire({
+          icon: "success",
+          title: "Masuk sebagai " + username,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        localStorage.setItem("id", user.id);
+        history.push("/");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
   };
-
-
+console.log("error")
   return (
     <MDBContainer className="p-3">
       <MDBRow className="align-items-center justify-content-center">
@@ -43,16 +46,16 @@ function Login() {
           <img src="https://psb.binbaz.or.id/login/images/ilustrasi2.jpg" className="img-fluid" alt="Phone image" />
         </MDBCol>
 
-        <MDBCol col='12' md='6'>
+        <MDBCol col='12' md='6' onSubmit={handleLogin} method="POST">
           <h1 style={{ textAlign: "center", marginBottom: "3%" }}> <i> <u>Login</u> </i></h1>
           <MDBInput
             wrapperClass='mb-4'
-            label='Email address'
-            id='email'
-            type='email'
+            label='Username address'
+            id='username'
+            type='username'
             size="lg"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <MDBInput
             wrapperClass='mb-4'
@@ -69,7 +72,7 @@ function Login() {
             <a href="/daftar">Belum punya akun? ayo Registerrasi dulu</a>
           </div>
 
-          <MDBBtn className="mb-4 w-100" size="lg" onClick={handleLogin}>Sign in</MDBBtn>
+          <MDBBtn className="mb-4 w-100" size="lg" type="submit">Sign in</MDBBtn>
         </MDBCol>
       </MDBRow>
     </MDBContainer>

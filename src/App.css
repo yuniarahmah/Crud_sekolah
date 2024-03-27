@@ -91,7 +91,7 @@
   width: 250px;
   height: 100%;
   overflow-y: auto;
-  background: #333A73;
+  background: #008DDA;
   transition: left 0.5s ease;
 }
 
@@ -103,7 +103,7 @@
 }
 
 #sidebar header {
-  background-color: #333A73;
+  background-color: #008DDA;
   font-size: 20px;
   line-height: 52px;
   text-align: center;
@@ -126,7 +126,7 @@
 
 #sidebar .nav a:hover {
   color: #eceff1;
-  background-color: #455a64;
+  background-color:black;
 }
 
 .btn-close {
@@ -141,7 +141,7 @@
 }
 
 .navbar {
-  background-color: #333A73;
+  background-color: #008DDA;
   color: #fff;
   padding: 10px 20px;
   display: flex;
@@ -194,6 +194,6 @@
 }
 
 #sidebar .nav .active {
-  background-color: #333A73; /* Warna latar untuk item aktif */
+  background-color: #008DDA; /* Warna latar untuk item aktif */
   color: #eceff1; /* Warna teks untuk item aktif */
 }

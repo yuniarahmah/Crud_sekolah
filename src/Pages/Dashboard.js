@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table, Card } from "react-bootstrap"; // Impor Button dari react-bootstrap
 import axios from "axios";
+import Navbarcom from "../Component/Navbar";
 
 function Dashboard() {
   const [users, setUsers] = useState([]);
@@ -21,6 +22,7 @@ function Dashboard() {
 
   return (
     <>
+    <Navbarcom/>
       <div
         style={{
           background: "#f0f0f0",

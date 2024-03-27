@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Table, Pagination, Form, Button } from "react-bootstrap";
+import { Table, Pagination, Form, Button, Navbar } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenSquare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import Navbarcom from "../Component/Navbar";
 
 function Data_guru() {
   const [users, setUsers] = useState([]);
@@ -50,6 +51,8 @@ function Data_guru() {
   };
 
   return (
+    <>
+    <Navbarcom/>
     <div style={{ padding: "50px" }}>
       <Form>
         <Form.Group controlId="formSearch" style={{ width: "10%" }}>
@@ -140,6 +143,7 @@ function Data_guru() {
         )}
       </Pagination>
     </div>
+    </>
   );
 }
 

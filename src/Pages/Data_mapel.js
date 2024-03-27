@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenSquare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
+import Navbarcom from "../Component/Navbar";
 
 function Data_mapel() {
   const [users, setUsers] = useState([]);
@@ -72,6 +73,8 @@ function Data_mapel() {
   };
 
   return (
+    <>
+    <Navbarcom/>
     <div style={{ padding: "50px" }}>
       <Form>
         <Form.Group controlId="formSearch" style={{ width: "10%" }}>
@@ -162,6 +165,7 @@ function Data_mapel() {
         )}
       </Pagination>
     </div>
+    </>
   );
 }
 
