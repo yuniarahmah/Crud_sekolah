@@ -1,15 +1,15 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import './App.css';
 import Navbarcom from './Component/Navbar';
-import Login from './Login';
 import Home from './Pages/home';
-import Register from './Register';
 import Dashboard from './Pages/Dashboard';
 import Data_siswa from './Pages/Data_siswa';
 import Data_guru from './Pages/Data_guru';
 import Data_mapel from './Pages/Data_mapel';
 import Data_kelas from './Pages/Data_kelas';
 import PrivateRoute from './Component/private';
+import Register from './Auth/Register';
+import Login from './Auth/Login';
 
 function App() {
   return (

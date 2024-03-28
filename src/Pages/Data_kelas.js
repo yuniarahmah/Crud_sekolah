@@ -53,7 +53,7 @@ function Data_kelas() {
   return (
     <>
     <Navbarcom/>
-    <div style={{ padding: "50px" }}>
+    <div style={{ padding: "50px", marginTop: "10%" }}>
       <Form>
         <Form.Group controlId="formSearch" style={{ width: "10%" }}>
           <Form.Control

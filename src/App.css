@@ -197,3 +197,20 @@
   background-color: #008DDA; /* Warna latar untuk item aktif */
   color: #eceff1; /* Warna teks untuk item aktif */
 }
+
+
+/* css animasi */
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.8s ease-out forwards;
+}

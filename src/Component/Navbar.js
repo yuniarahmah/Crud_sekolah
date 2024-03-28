@@ -158,7 +158,7 @@ function Navbarcom() {
                     src={Logo}
                     alt="Logo"
                     width={"70px"}
-                    height={"60px"}
+                    height={"50px"}
                     className="mr-3"
                   />
                   <p

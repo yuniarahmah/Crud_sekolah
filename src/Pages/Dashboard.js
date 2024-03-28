@@ -31,6 +31,7 @@ function Dashboard() {
           marginBottom: "20px",
           fontWeight: "bold",
           fontSize: "40px",
+          marginTop: "5%" 
         }}
       >
         Dashboard

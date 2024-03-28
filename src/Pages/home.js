@@ -24,12 +24,12 @@ function Home() {
           height: "50vh",
           margin: "0",
           display: "flex",
-          justifyContent: "space-between", // Mengatur jarak antara elemen-elemen di dalam flex container
+          justifyContent: "space-between",
           alignItems: "center",
         }}
       >
         {/* gambar */}
-        <div style={{ marginRight: "30px" }}>
+        <div className="slide-in" style={{ marginRight: "30px" }}>
           <img
             src={welcome}
             alt="Gambar"
@@ -37,13 +37,13 @@ function Home() {
           />
         </div>
         {/* text */}
-        <div style={{ order: "-1" }}>
-          {" "}
-          {/* Menggeser teks ke kiri dengan nilai order yang lebih kecil */}
+        <div className="slide-in" style={{ order: "-1" }}>
           <h1
             style={{ marginBottom: "10%", marginTop: "0", marginLeft: "10%" }}
           >
-            Selamat Data didalam Website Sekolah Smk Binanusantara
+            Selamat Datang di dalam Website Sekolah Smk Binanusantara
+            <p>
+            <a href="/login">Ayo Login untuk melihat selengkapnya</a></p>
           </h1>
         </div>
       </div>
@@ -69,7 +69,8 @@ function Home() {
           <Card.Body>
             <Card.Title>Penghargaan Siswa</Card.Title>
             <Card.Text>
-              pemberian piagam penghargaan untuk siswa yang memiliki nilai diatas rata-rata
+              pemberian piagam penghargaan untuk siswa yang memiliki nilai
+              diatas rata-rata
             </Card.Text>
           </Card.Body>
         </Card>
@@ -80,14 +81,15 @@ function Home() {
             marginBottom: "15%",
             textAlign: "center",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.4)", // Menambahkan bayangan
-            position: "relative"
+            position: "relative",
           }}
         >
           <Card.Img variant="top" src={foto2} />
           <Card.Body>
             <Card.Title>Prestasi Kejuaraan Pramuka</Card.Title>
             <Card.Text>
-              Siswa kelas Xll Tkj yang dikirm dari smk binanusantara untuk mengikuti kejuaraan ubaloka-4 memborong piala kemenangan
+              Siswa kelas Xll Tkj yang dikirm dari smk binanusantara untuk
+              mengikuti kejuaraan ubaloka-4 memborong piala kemenangan
             </Card.Text>
           </Card.Body>
         </Card>
@@ -104,7 +106,8 @@ function Home() {
           <Card.Body>
             <Card.Title>Juara Pencaksilat putra</Card.Title>
             <Card.Text>
-             beberapa siswa dari binanusantara diturunkan di gelanggang kejuaraan Kendal championship meraih juara yang membanggakan
+              beberapa siswa dari binanusantara diturunkan di gelanggang
+              kejuaraan Kendal championship meraih juara yang membanggakan
             </Card.Text>
           </Card.Body>
         </Card>
@@ -212,9 +215,9 @@ function Home() {
           </div>
         </div>
       </div>
-        <footer style={{ textAlign: "center", marginTop: "20px" }}>
-          <p>&copy; 2024 Tugas Java.25 march Bootcamp.</p>
-        </footer>
+      <footer style={{ textAlign: "center", marginTop: "20px" }}>
+        <p>&copy; 2024 Tugas Java.25 march Bootcamp.</p>
+      </footer>
     </>
   );
 }
