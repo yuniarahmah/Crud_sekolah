@@ -90,11 +90,11 @@ function Navbarcom() {
               </header>
               <ul className="nav flex-column">
                 {/* Sidebar items */}
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <a href="/dashboard" className="nav-link">
                     <FontAwesomeIcon icon={faChartSimple} /> Dashboard
                   </a>
-                </li>
+                </li> */}
                 <li className="nav-item">
                   <a href="/guru" className="nav-link">
                     <FontAwesomeIcon icon={faUserTie} /> Guru
@@ -172,9 +172,9 @@ function Navbarcom() {
               <div className="navbar-links">
                 {!isOpen && (
                   <>
-                    <a href="/dashboard" className="space">
+                    {/* <a href="/dashboard" className="space">
                       Dashboard
-                    </a>
+                    </a> */}
                     <a href="/guru" className="space">
                       Guru
                     </a>

@@ -1,28 +1,46 @@
 import React, { useEffect, useState } from "react";
-import { Table, Card } from "react-bootstrap"; // Impor Button dari react-bootstrap
-import axios from "axios";
+import { Card } from "react-bootstrap";
+import axiosInstance from "./api"; // Ensure this path is correct
 import Navbarcom from "../Component/Navbar";
 
 function Dashboard() {
-  const [users, setUsers] = useState([]);
+  const [data, setData] = useState({
+    murids: [],
+    kelas: [],
+    guru: [],
+    mapel: [],
+  });
 
   useEffect(() => {
-    const getAll = () => {
-      axios
-        .get("https://fakestoreapi.com/users?limit=5") // Menambahkan parameter limit=5
-        .then((res) => {
-          setUsers(res.data);
-        })
-        .catch((error) => {
-          alert("Terjadi kesalahan" + error);
+    const fetchData = async () => {
+      try {
+        // Using the axiosInstance to make requests to the API
+        const responses = await Promise.all([
+          axiosInstance.get('/murid'),
+          axiosInstance.get('/kelas'),
+          axiosInstance.get('/guru'),
+          axiosInstance.get('/mapel'),
+        ]);
+        
+        // Updating state with the fetched data
+        setData({
+          murids: responses[0].data,
+          kelas: responses[1].data,
+          guru: responses[2].data,
+          mapel: responses[3].data,
         });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
-    getAll();
+
+    fetchData();
   }, []);
 
+  // Ensure you're displaying data correctly
   return (
     <>
-    <Navbarcom/>
+      <Navbarcom />
       <div
         style={{
           background: "#f0f0f0",
@@ -46,84 +64,38 @@ function Dashboard() {
           marginLeft: "3%"
         }}
       >
-        {/* Kartu */}
-        <div style={{ gap: "4" }}>
-          <Card style={{ width: "24rem", height:"10rem", background: "rgba(238, 153, 194, 0.7)" }}>
-            <Card.Body>
-              <Card.Title>Jumlah Siswa</Card.Title>
-              <Card.Text>This is card content for card 1.</Card.Text>
-            </Card.Body>
-          </Card>
-        </div>
+        {/* Example card for displaying number of students */}
+        <Card style={{ width: "24rem", height:"10rem", background: "rgba(238, 153, 194, 0.7)" }}>
+          <Card.Body>
+            <Card.Title>Siswa</Card.Title>
+            <Card.Text>
+              Jumlah: {data.murids.length}
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        <Card style={{ width: "24rem", height:"10rem", background: "rgba(238, 153, 194, 0.7)" }}>
+          <Card.Body>
+            <Card.Title>Guru</Card.Title>
+            <Card.Text>
+              Jumlah: {data.guru.length}
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        <Card style={{ width: "24rem", height:"10rem", background: "rgba(238, 153, 194, 0.7)" }}>
+          <Card.Body>
+            <Card.Title>kelas</Card.Title>
+            <Card.Text>
+              Jumlah: {data.kelas.length}
+            </Card.Text>
+          </Card.Body>
+        </Card>
 
-        <div style={{ gap: "1" }}>
-          <Card style={{ width: "24rem", height:"10rem", background: "rgba(238, 153, 194, 0.7)" }}>
-            <Card.Body>
-              <Card.Title>Guru</Card.Title>
-              <Card.Text>This is card content for card 2.</Card.Text>
-            </Card.Body>
-          </Card>
-        </div>
+        {/* Repeat similar structure for Guru, Kelas, and Mapel with their respective data */}
+        {/* Ensure you replace "This is card content for card X." with actual data */}
 
-        <div style={{ gap: "1" }}>
-          <Card style={{ width: "24rem", height:"10rem", background: "rgba(238, 153, 194, 0.7)" }}>
-            <Card.Body>
-              <Card.Title>Kelas</Card.Title>
-              <Card.Text>This is card content for card 3.</Card.Text>
-            </Card.Body>
-          </Card>
-        </div>
-
-        <div style={{ gap: "1" }}>
-          <Card style={{ width: "24rem", height:"10rem", background: "rgba(238, 153, 194, 0.7)" }}>
-            <Card.Body>
-              <Card.Title>Mapel</Card.Title>
-              <Card.Text>This is card content for card 4.</Card.Text>
-            </Card.Body>
-          </Card>
-        </div>
       </div>
-
-      {/* Tabel */}
-      <div style={{ marginBottom:"10%" }}>
-        <Table
-          striped
-          bordered
-          hover
-          style={{
-            marginTop: "8px",
-            marginLeft: "35px",
-            width: "calc(95% - 10px)",
-          }}
-        >
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Nama Pengguna</th>
-              <th>Alamat</th>
-              <th>Kota</th>
-              <th>Nomor</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user, index) => (
-              <tr key={user.id}>
-                <td>{index + 1}</td>
-                <td>{user.username}</td>
-                <td>{user.address.street}</td>
-                <td>{user.address.city}</td>
-                <td>{user.address.number}</td>
-                <td>{user.email}</td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      </div>
-
-      {/* Footer */}
       <footer style={{ textAlign: "center", marginTop: "20px" }}>
-        <p>&copy;2024 Tugas Java.25 march Bootcamp.</p>
+        <p>&copy;2024 Tugas Java.25 March Bootcamp.</p>
       </footer>
     </>
   );

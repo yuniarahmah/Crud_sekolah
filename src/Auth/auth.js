@@ -19,12 +19,11 @@ export const login = async (email, username, password) => {
   }
 };
 
-export const register = async (username, email, password) => {
+export const register = async (username, password) => {
   try {
     // Use of template literals for consistency
     const response = await axios.post(`${apiUrl}/register`, {
       username,
-      email,
       password,
     });
     return response.data;

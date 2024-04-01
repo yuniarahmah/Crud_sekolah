@@ -15,7 +15,6 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(`${apiUrl}/login`, {
-        email,
         username,
         password,
       });
@@ -33,7 +32,7 @@ const Login = () => {
           confirmButtonText: "OK",
         });
 
-        window.location.href = "/dashboard";
+        window.location.href = "/siswa";
       } else {
         throw new Error("Response data is missing.");
       }
@@ -86,7 +85,6 @@ const Login = () => {
           />
 
           <div className="d-flex justify-content-between mx-4 mb-4">
-            <a href="/forgot-password">Forgot Password</a>
             <a href="/daftar">Belum punya akun? ayo Registrasi dulu</a>
           </div>
 
