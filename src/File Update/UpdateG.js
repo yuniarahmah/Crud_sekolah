@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button, Card, Form } from 'react-bootstrap';
+import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { useParams, useHistory } from 'react-router-dom';
 
@@ -68,55 +68,81 @@ function UpdateGuru() {
   };
 
   return (
-    <Card className="mx-auto my-3 p-4" style={{ maxWidth: '900px' }}>
-      <h2 className="text-center mb-4">Edit Data Guru</h2>
-      <Form onSubmit={updateGuru}>
-        {/* Form fields */}
-        <Form.Group controlId="nama_guru">
-          <Form.Label>Nama Guru</Form.Label>
-          <Form.Control
-            type="text"
-            name="nama_guru"
-            value={formData.nama_guru}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group controlId="nik">
-          <Form.Label>NIK</Form.Label>
-          <Form.Control
-            type="text"
-            name="nik"
-            value={formData.nik}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group controlId="alamat_guru">
-          <Form.Label>Alamat Guru</Form.Label>
-          <Form.Control
-            type="text"
-            name="alamat_guru"
-            value={formData.alamat_guru}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group controlId="nomer_hp">
-          <Form.Label>Nomer HP</Form.Label>
-          <Form.Control
-            type="text"
-            name="nomer_hp"
-            value={formData.nomer_hp}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <div className="text-center my-2">
-          <Button variant="primary" type="submit">Simpan</Button>
-        </div>
-      </Form>
-    </Card>
+    <Container className="mt-5">
+    <Row className="justify-content-md-center">
+      <Col xs={12} md={8} lg={6}>
+        <Card className="p-4">
+          <h2 className="text-center mb-4">Edit Data Guru</h2>
+          <Form onSubmit={updateGuru}>
+            {/* Form fields with Col for better spacing and alignment */}
+            <Form.Group as={Row} className="mb-3" controlId="nama_guru">
+              <Form.Label column sm="3">
+                Nama Guru
+              </Form.Label>
+              <Col sm="9">
+                <Form.Control
+                  type="text"
+                  name="nama_guru"
+                  value={formData.nama_guru}
+                  onChange={handleChange}
+                  required
+                />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="nik">
+              <Form.Label column sm="3">
+                NIK
+              </Form.Label>
+              <Col sm="9">
+                <Form.Control
+                  type="text"
+                  name="nik"
+                  value={formData.nik}
+                  onChange={handleChange}
+                  required
+                />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="alamat_guru">
+              <Form.Label column sm="3">
+                Alamat Guru
+              </Form.Label>
+              <Col sm="9">
+                <Form.Control
+                  type="text"
+                  name="alamat_guru"
+                  value={formData.alamat_guru}
+                  onChange={handleChange}
+                  required
+                />
+              </Col>
+            </Form.Group>
+
+            <Form.Group as={Row} className="mb-3" controlId="nomer_hp">
+              <Form.Label column sm="3">
+                Nomer HP
+              </Form.Label>
+              <Col sm="9">
+                <Form.Control
+                  type="text"
+                  name="nomer_hp"
+                  value={formData.nomer_hp}
+                  onChange={handleChange}
+                  required
+                />
+              </Col>
+            </Form.Group>
+
+            <div className="text-center my-2">
+              <Button variant="primary" type="submit">Simpan</Button>
+            </div>
+          </Form>
+        </Card>
+      </Col>
+    </Row>
+  </Container>
   );
 }
 

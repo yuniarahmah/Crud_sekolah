@@ -1,224 +1,191 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
-import logo from "../asset/lomba-rev.jpg";
-import foto1 from "../asset/foto.jpg";
-import foto2 from "../asset/foto2.webp";
-import foto3 from "../asset/foto1.webp";
-import welcome from "../asset/tanda.svg";
+import logo from "../asset/Fotbar.jpg"; // Pastikan jalur benar
+import Navbarcom from "../Component/Navbar";
+// Import gambar yang digunakan di kartu
+import foto1 from "../asset/foto.jpg"; // Perbarui jalur sesuai kebutuhan
+import foto2 from "../asset/foto2.webp"; // Perbarui jalur sesuai kebutuhan
+import foto3 from "../asset/foto3.jpg"; // Perbarui jalur sesuai kebutuhan
 
 function Home() {
   const backgroundStyle = {
-    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), url(${logo})`, // Menggunakan variabel gambar yang diimpor
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${logo})`,
     backgroundSize: "cover",
-    backgroundPosition: "center top",
+    backgroundPosition: "center bottom",
     backgroundRepeat: "no-repeat",
-    minHeight: "100vh",
+    height: "100vh", // Mengubah tinggi agar bisa mengikuti konten
+    width: "100%",
+    zIndex: -1,
   };
-  const blueTransparentColor = "rgba(0, 141, 218, 0.7)"; // Warna biru dengan tingkat transparansi
 
   return (
     <>
-      <div
-        style={{
-          background: "#008DDA",
-          height: "50vh",
-          margin: "0",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        {/* gambar */}
-        <div className="slide-in" style={{ marginRight: "30px" }}>
-          <img
-            src={welcome}
-            alt="Gambar"
-            style={{ width: "40rem", height: "30%" }}
-          />
-        </div>
-        {/* text */}
-        <div className="slide-in" style={{ order: "-1" }}>
-          <h1
-            style={{ marginBottom: "10%", marginTop: "0", marginLeft: "10%" }}
-          >
-            Selamat Datang di dalam Website Sekolah Smk Binanusantara
-            <p>
-            <a href="/login">Ayo Login untuk melihat selengkapnya</a></p>
-          </h1>
-        </div>
-      </div>
-
-      <h1 style={{ textAlign: "center" }}>
-        {" "}
-        <b>
-          {" "}
-          <u>Prestasi yang diraih oleh siswa Binanusantara</u>
-        </b>
-      </h1>
-      <div style={{ display: "flex", marginLeft: "5%", gap: "5%" }}>
-        <Card
-          style={{
-            width: "30rem",
-            marginTop: "5%",
-            marginBottom: "15%",
-            textAlign: "center",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.4)", // Menambahkan bayangan
-          }}
-        >
-          <Card.Img variant="top" src={foto1} />
-          <Card.Body>
-            <Card.Title>Penghargaan Siswa</Card.Title>
-            <Card.Text>
-              pemberian piagam penghargaan untuk siswa yang memiliki nilai
-              diatas rata-rata
-            </Card.Text>
-          </Card.Body>
-        </Card>
-        <Card
-          style={{
-            width: "30rem",
-            marginTop: "5%",
-            marginBottom: "15%",
-            textAlign: "center",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.4)", // Menambahkan bayangan
-            position: "relative",
-          }}
-        >
-          <Card.Img variant="top" src={foto2} />
-          <Card.Body>
-            <Card.Title>Prestasi Kejuaraan Pramuka</Card.Title>
-            <Card.Text>
-              Siswa kelas Xll Tkj yang dikirm dari smk binanusantara untuk
-              mengikuti kejuaraan ubaloka-4 memborong piala kemenangan
-            </Card.Text>
-          </Card.Body>
-        </Card>
-        <Card
-          style={{
-            width: "30rem",
-            marginTop: "5%",
-            marginBottom: "15%",
-            textAlign: "center",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.4)", // Menambahkan bayangan
-          }}
-        >
-          <Card.Img variant="top" src={foto3} />
-          <Card.Body>
-            <Card.Title>Juara Pencaksilat putra</Card.Title>
-            <Card.Text>
-              beberapa siswa dari binanusantara diturunkan di gelanggang
-              kejuaraan Kendal championship meraih juara yang membanggakan
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      </div>
+      <Navbarcom />
       <div style={backgroundStyle}>
-        <div>
-          <div
-            style={{
-              display: "flex",
-              gap: "5px",
-              marginRight: "5px",
-              marginLeft: "5px",
-            }}
-          >
-            <Card
-              style={{
-                width: "30rem",
-                marginTop: "34%",
-                height: "10%",
-                backgroundColor: blueTransparentColor, // Menggunakan warna pink dengan transparansi
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.4)", // Menambahkan bayangan
-              }}
+        {/* Teks dan Tombol */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "20px",
+            paddingTop: "30vh", // Penambahan padding atas untuk menaikkan konten
+            textAlign: "center", // Menyelaraskan teks ke tengah
+            color: "white",
+          }}
+        >
+          <p style={{ textTransform: "uppercase", fontSize: "3rem" }}>
+            {" "}
+            <i>
+              {" "}
+              <b>Selamat Datang di dalam Website Sekolah Smk Binanusantara </b>
+            </i>
+          </p>
+          <h4>
+            {" "}
+            <b>
+              {" "}
+              <i>
+                Ayo Kepoin Sekolah Smk Binusa yuk, Gurunya seru seru dn banyak{" "}
+                <br />
+                kegiatan menarik yang sering diadakan loh, ayo segera gabung
+                lewat web kami <br />
+                atau Langsung saja Login untuk mengetahui tentang sekolah kami{" "}
+                <br />
+              </i>{" "}
+            </b>{" "}
+          </h4>
+          <div style={{ marginTop: "20px" }}>
+            <a
+              href="https://binusasmg.sch.id/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ textDecoration: "none", marginRight: "10px" }}
+              className="btn-kunjungi"
             >
-              <Card.Body>
-                <Card.Title style={{ color: "white", textAlign: "center" }}>
-                  Ekstrakurikuler
-                </Card.Title>
-                <Card.Text style={{ color: "white", margin: "10px" }}>
-                  Smk Binanusantara Memiliki ekstrakurikuler yang menarik loh
-                  ayo kepoin sekolah binanusantara semarang. cari selengkapnya
-                  dibawah ini yaa
-                </Card.Text>
-                <a
-                  href="https://binusasmg.sch.id/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ textDecoration: "none" }}
-                >
-                  <Card.Link style={{ color: "white", textAlign: "center" }}>
-                    Ayo Kunjungi Websitenya
-                  </Card.Link>
-                </a>
-              </Card.Body>
-            </Card>
-            <Card
-              style={{
-                width: "29rem",
-                marginTop: "34%",
-                height: "",
-                backgroundColor: blueTransparentColor, // Menggunakan warna pink dengan transparansi
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.4)", // Menambahkan bayangan
-              }}
-            >
-              <Card.Body>
-                <Card.Title style={{ color: "white", textAlign: "center" }}>
-                  Prestasi
-                </Card.Title>
-                <Card.Text style={{ color: "white" }}>
-                  Smk Binanusantara juga memiliki banyak murid berprestasi,
-                  apakah kamu ingin menjadi salah satu murid berprestasi Smk
-                  binanusantara? ayo daftar di Smk binanusantara.
-                </Card.Text>
-              </Card.Body>
-            </Card>
-            <Card
-              style={{
-                width: "29rem",
-                marginTop: "34%",
-                height: "",
-                backgroundColor: blueTransparentColor, // Menggunakan warna pink dengan transparansi
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.4)", // Menambahkan bayangan
-              }}
-            >
-              <Card.Body>
-                <Card.Title style={{ color: "white", textAlign: "center" }}>
-                  Beasiswa
-                </Card.Title>
-                <Card.Text style={{ color: "white" }}>
-                  Smk Binanusatara juga menyediakan beasiswa buat siswa yang
-                  kurang mampu, dan berprestasi.
-                </Card.Text>
-              </Card.Body>
-            </Card>
-            <Card
-              style={{
-                width: "29rem",
-                marginTop: "34%",
-                height: "",
-                backgroundColor: blueTransparentColor, // Menggunakan warna pink dengan transparansi
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.4)", // Menambahkan bayangan
-              }}
-            >
-              <Card.Body>
-                <Card.Title style={{ color: "white", textAlign: "center" }}>
-                  Fasilitas
-                </Card.Title>
-                <Card.Text style={{ color: "white" }}>
-                  Fasilitas Smk Binanusantara dilengkapi oleh yayasan terdapat
-                  Lab untuk setiap jurusan, ada juga kantin dan koprasi yang
-                  disediakan, ada juga uks untuk tempat kesehatan dan masih
-                  banyak lagi fasilitas lainnya.
-                </Card.Text>
-              </Card.Body>
-            </Card>
+              Kunjungi Websitenya
+            </a>
+            <a href="/login" className="btn-login" style={{ border: "10%" }}>
+              Login
+            </a>
           </div>
         </div>
       </div>
-      <footer style={{ textAlign: "center", marginTop: "20px" }}>
-        <p>&copy; 2024 Tugas Java.25 march Bootcamp.</p>
+
+      <div
+        style={{
+          padding: "10%",
+          display: "flex",
+          gap: "20px",
+          flexWrap: "wrap",
+          alignItems: "center",
+        }}
+      >
+        <Card
+          bg="danger" // Represents Red
+          key="Red"
+          text="white"
+          style={{ width: "18rem" }}
+          className="mb-2"
+        >
+          <Card.Body>
+            <Card.Title>Red Card Title</Card.Title>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        <Card
+          bg="primary" // Represents Red
+          key="Red"
+          text="white"
+          style={{ width: "18rem" }}
+          className="mb-2"
+        >
+          <Card.Body>
+            <Card.Title>Red Card Title</Card.Title>
+            <Card.Text>
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      </div>
+
+      {/* Bagian Prestasi */}
+      <div
+        className="prestasi-container"
+        style={{
+          // marginTop: "50px",
+          backgroundColor: "#F6F5F5",
+        }}
+      >
+        <h1 style={{ textAlign: "center" }}>
+          <b>
+            <u>Prestasi yang diraih oleh siswa Binanusantara</u>
+          </b>
+        </h1>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            gap: "5%",
+          }}
+        >
+          {/* Kartu-kartu */}
+          <CardComponent
+            title="Penghargaan Siswa"
+            text="Pemberian piagam penghargaan untuk siswa yang memiliki nilai diatas rata-rata"
+            image={foto1}
+          />
+          <CardComponent
+            title="Prestasi Kejuaraan Pramuka"
+            text="Siswa kelas XII TKJ yang dikirim dari SMK Binanusantara untuk mengikuti kejuaraan ubaloka-4 memborong piala kemenangan"
+            image={foto2}
+          />
+          <CardComponent
+            title="Juara Pencak Silat Putra"
+            text="Beberapa siswa dari Binanusantara diturunkan di gelanggang kejuaraan Kendal championship meraih juara yang membanggakan"
+            image={foto3}
+          />
+        </div>
+      </div>
+
+      {/* Foote */}
+      <footer
+        style={{
+          textAlign: "center",
+          marginTop: "20px",
+          zIndex: 2,
+        }}
+      >
+        <p>&copy; 2024 Tugas Java.25 March Bootcamp.</p>
       </footer>
     </>
+  );
+}
+
+// Card component for reuse
+function CardComponent({ title, text, image }) {
+  return (
+    <Card
+      style={{
+        width: "25rem",
+        marginTop: "5%",
+        marginBottom: "15%",
+        textAlign: "center",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.4)",
+      }}
+    >
+      <Card.Img variant="top" src={image} />
+      <Card.Body>
+        <Card.Title>{title}</Card.Title>
+        <Card.Text>{text}</Card.Text>
+      </Card.Body>
+    </Card>
   );
 }
 

@@ -6,12 +6,12 @@ import {
   faUserTie,
   faChartSimple,
   faPeopleRoof,
-  faPaste
+  faPaste,
 } from "@fortawesome/free-solid-svg-icons";
 
 function Navbarcom() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -28,7 +28,8 @@ function Navbarcom() {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    // Lakukan logika logout di sini, seperti membersihkan sesi atau memanggil API logout
+    localStorage.removeItem("token"); // Hapus token dari local storage
+    // Lakukan tambahan logika logout jika perlu, seperti memanggil API logout
   };
 
   useEffect(() => {
@@ -90,11 +91,11 @@ function Navbarcom() {
               </header>
               <ul className="nav flex-column">
                 {/* Sidebar items */}
-                {/* <li className="nav-item">
+                <li className="nav-item">
                   <a href="/dashboard" className="nav-link">
                     <FontAwesomeIcon icon={faChartSimple} /> Dashboard
                   </a>
-                </li> */}
+                </li>
                 <li className="nav-item">
                   <a href="/guru" className="nav-link">
                     <FontAwesomeIcon icon={faUserTie} /> Guru
@@ -115,11 +116,20 @@ function Navbarcom() {
                     <FontAwesomeIcon icon={faPaste} /> Mapel
                   </a>
                 </li>
-                <li className="nav-item">
-                  <a href="/login" className="nav-link">
-                    {isLoggedIn ? "Logout" : "Login"}
-                  </a>
-                </li>
+                {isLoggedIn ? (
+                  <li className="nav-item">
+                    {/* Menambahkan onClick untuk handleLogout */}
+                    <a href="/" onClick={handleLogout} className="nav-link">
+                      Logout
+                    </a>
+                  </li>
+                ) : (
+                  <li className="nav-item">
+                    <a href="/login" className="nav-link">
+                      Login
+                    </a>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
@@ -172,9 +182,9 @@ function Navbarcom() {
               <div className="navbar-links">
                 {!isOpen && (
                   <>
-                    {/* <a href="/dashboard" className="space">
+                    <a href="/dashboard" className="space">
                       Dashboard
-                    </a> */}
+                    </a>
                     <a href="/guru" className="space">
                       Guru
                     </a>

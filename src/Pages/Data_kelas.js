@@ -36,13 +36,13 @@ function Data_kelas() {
 
   const handleDelete = async (id) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "Yakin ingin menghapus data ini?",
+      text: "jika dihapus maka data tidak dapat dipulihkan!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "ya, hapus data ini!",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -52,7 +52,7 @@ function Data_kelas() {
               Authorization: `Bearer ${token}`,
             },
           });
-          Swal.fire("Deleted!", "The user has been deleted.", "success").then(
+          Swal.fire("Hapus!", "Data sudah terhapus secara permanen", "success").then(
             () => {
               setKelas(kelas.filter((kelas) => kelas.id !== id));
             }

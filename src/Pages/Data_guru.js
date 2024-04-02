@@ -16,7 +16,6 @@ function DataGuru() {
   const [currentPage, setCurrentPage] = useState(1);
   const [guruPerPage] = useState(5);
   const [searchTerm, setSearchTerm] = useState("");
-  const history = useHistory();
 
   useEffect(() => {
     axios
@@ -99,7 +98,7 @@ function DataGuru() {
                 type="text"
                 placeholder="Search"
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={(e) => handleSearchChange(e.target.value)}
               />
             </Form.Group>
           </Col>

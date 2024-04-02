@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Button, Form, Card } from "react-bootstrap";
+import { Button, Form, Card, Container, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom"; // Make sure to import useHistory
+import Navbarcom from "../Component/Navbar";
 
 function TambahSiswa() {
   const [namaSiswa, setNamaSiswa] = useState("");
@@ -69,86 +70,97 @@ function TambahSiswa() {
   };
 
   return (
-    <Card className="mx-auto my-3 p-4" style={{ maxWidth: "900px" }}>
-      <h2 className="text-center mb-4">Tambah Siswa</h2>
-      <Form onSubmit={handleSubmit}>
-        {/* Form fields */}
-        <Form.Group className="mb-3">
-          <Form.Label>Nama Siswa</Form.Label>
-          <Form.Control
-            type="text"
-            value={namaSiswa}
-            onChange={(e) => setNamaSiswa(e.target.value)}
-            placeholder="Isi dengan nama anda"
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>NISN</Form.Label>
-          <Form.Control
-            type="number"
-            value={nisn}
-            onChange={(e) => setNisn(e.target.value)}
-            placeholder="silahkan ketik Nisn anda"
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Hobi</Form.Label>
-          <Form.Control
-            type="text"
-            value={hobi}
-            onChange={(e) => setHobi(e.target.value)}
-            placeholder="Silahkan tulis hobi anda"
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Umur</Form.Label>
-          <Form.Control
-            type="number"
-            value={umur}
-            onChange={(e) => setUmur(e.target.value)}
-            placeholder="Silahkan isi data umur anda"
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Jurusan</Form.Label>
-          <Form.Control
-            type="text"
-            value={jurusan}
-            onChange={(e) => setJurusan(e.target.value)}
-            placeholder="silahkan ketikan jurusan anda"
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>kelas</Form.Label>
-          <Form.Control
-            type="text"
-            value={kelas}
-            onChange={(e) => setKelas(e.target.value)}
-            placeholder="silahkan ketik kelas anda"
-            required
-          />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Alamat</Form.Label>
-          <Form.Control
-            type="text"
-            value={alamat}
-            onChange={(e) => setAlamat(e.target.value)}
-            placeholder="ketikan alamat an"
-            required
-          />
-        </Form.Group>
-        {/* Other Form Groups for NISN, Kelas, Jurusan, Alamat */}
-        <Button variant="primary" type="submit">
-          Tambah Siswa
-        </Button>
-      </Form>
-    </Card>
+    <>
+    <></>
+      <Container style={{ paddingTop: "10vh", paddingBottom: "5vh" }}>
+        {/* Menambahkan padding atas dan bawah */}
+        <Row>
+          <Col xs={12} md={8} lg={6} className="mx-auto">
+            {/* Menyesuaikan ukuran dan posisi secara responsif */}
+            <Card className="p-4">
+              <h2 className="text-center mb-4">Tambah Siswa</h2>
+              <Form onSubmit={handleSubmit}>
+                {/* Form fields */}
+                <Form.Group className="mb-3">
+                  <Form.Label>Nama Siswa</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={namaSiswa}
+                    onChange={(e) => setNamaSiswa(e.target.value)}
+                    placeholder="Isi dengan nama anda"
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>NISN</Form.Label>
+                  <Form.Control
+                    type="number"
+                    value={nisn}
+                    onChange={(e) => setNisn(e.target.value)}
+                    placeholder="silahkan ketik Nisn anda"
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Hobi</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={hobi}
+                    onChange={(e) => setHobi(e.target.value)}
+                    placeholder="Silahkan tulis hobi anda"
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Umur</Form.Label>
+                  <Form.Control
+                    type="number"
+                    value={umur}
+                    onChange={(e) => setUmur(e.target.value)}
+                    placeholder="Silahkan isi data umur anda"
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Jurusan</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={jurusan}
+                    onChange={(e) => setJurusan(e.target.value)}
+                    placeholder="silahkan ketikan jurusan anda"
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>kelas</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={kelas}
+                    onChange={(e) => setKelas(e.target.value)}
+                    placeholder="silahkan ketik kelas anda"
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Alamat</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={alamat}
+                    onChange={(e) => setAlamat(e.target.value)}
+                    placeholder="ketikan alamat an"
+                    required
+                  />
+                </Form.Group>
+                {/* Other Form Groups for NISN, Kelas, Jurusan, Alamat */}
+                <Button variant="primary" type="submit">
+                  Tambah Siswa
+                </Button>
+              </Form>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 }
 

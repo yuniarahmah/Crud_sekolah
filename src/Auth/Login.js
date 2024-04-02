@@ -32,7 +32,7 @@ const Login = () => {
           confirmButtonText: "OK",
         });
 
-        window.location.href = "/siswa";
+        window.location.href = "/dashboard";
       } else {
         throw new Error("Response data is missing.");
       }
