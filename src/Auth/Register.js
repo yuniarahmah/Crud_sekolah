@@ -13,7 +13,8 @@ function Register() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("admin"); // state baru untuk role
+  const [role, setRole] = useState("admin");
+  const [showPassword, setShowPassword] = useState(false); // State baru untuk kontrol tampilan password
 
   async function handleRegister(e) {
     e.preventDefault();
@@ -24,7 +25,7 @@ function Register() {
         username,
         password,
         email,
-        role, // Kirim role
+        role,
       });
 
       console.log("Registration successful:", response.data);
@@ -32,8 +33,8 @@ function Register() {
       // Tampilkan pesan sukses
       Swal.fire({
         icon: "success",
-        title: "Registration Successful!",
-        text: "You have successfully registered.",
+        title: "Registrasi anda Berhasil!",
+        text: "Akun anda sudah terdaftar.",
         timer: 2000,
         showConfirmButton: false,
       }).then(() => {
@@ -41,22 +42,21 @@ function Register() {
         window.location.href = "/login";
       });
     } catch (error) {
-      console.error("Error during registration:", error);
+      console.error("Registrasi error :", error);
 
       // Tampilkan pesan error
       const errorMessage =
-        error.response?.data?.message ||
-        "Failed to register. Please try again.";
+        error.response?.data?.message || "Anda gagal melakukan registrasi";
       Swal.fire({
         icon: "error",
-        title: "Registration Failed!",
+        title: "Registrasi gagal!",
         text: errorMessage,
       });
     }
   }
 
   return (
-    <MDBContainer className="p-3 my-5">
+    <MDBContainer className="p-5 my-5">
       <MDBRow className="align-items-center">
         {/* Kolom untuk gambar */}
         <MDBCol col="12" md="6" className="d-flex justify-content-center">
@@ -69,7 +69,7 @@ function Register() {
 
         {/* Kolom untuk form */}
         <MDBCol col="12" md="6">
-          <form onSubmit={handleRegister}>
+          <form onSubmit={handleRegister} method="POST">
             <h1 style={{ textAlign: "center", marginBottom: "3%" }}>
               <i>
                 <u>REGISTRASI</u>
@@ -79,7 +79,7 @@ function Register() {
               Silahkan isi data Registrasi dibawah ini
             </h3>
             <MDBInput
-              label="Username address"
+              label="Nama Pengguna"
               wrapperClass="mb-4"
               id="username"
               type="text"
@@ -87,24 +87,42 @@ function Register() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
-            {/* <MDBInput
-              label="Email address"
+
+            {/* Email input field */}
+            <MDBInput
+              label="Email"
               wrapperClass="mb-4"
               id="email"
               type="email"
               size="lg"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-            /> */}
+            />
+
             <MDBInput
               wrapperClass="mb-4"
               label="Password"
               id="password"
-              type="password"
+              type={showPassword ? "text" : "password"} // Kontrol tipe input berdasarkan state showPassword
               size="lg"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            <div className="form-check mb-4">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                id="showPasswordCheckbox"
+                checked={showPassword}
+                onChange={() => setShowPassword(!showPassword)} // Mengubah state showPassword
+              />
+              <label
+                className="form-check-label"
+                htmlFor="showPasswordCheckbox"
+              >
+                Show Password
+              </label>
+            </div>
 
             <div className="d-flex justify-content-between mx-4 mb-4">
               <a href="/login">Sudah punya akun? silahkan login</a>

@@ -22,7 +22,7 @@ function Data_siswa() {
     axios
       .get("http://localhost:8080/api/data_siswa", {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`, // Use the token here
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
       .then((res) => {
@@ -33,99 +33,83 @@ function Data_siswa() {
       });
   }, []);
 
-  const handleDelete = async (id) => {
-    // Same as your previous handleDelete function
-  };
-
-  const filteredUsers = users.filter(
-    (user) =>
-      user.nama_siswa?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.nisn?.toString().includes(searchTerm) ||
-      user.kelas?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.jurusan?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.hobi?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.alamat?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.umur?.toString().includes(searchTerm)
+  const filteredUsers = users.filter((user) =>
+    user.nama_siswa.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  // Handle search term change
+  const handleSearchChange = (value) => {
+    setSearchTerm(value);
+    setCurrentPage(1); // Reset to first page when search changes
+  };
 
   return (
     <>
       <Navbarcom />
-      <div className="container mt-5 pt-5">
-        <h1 className="my-4">Tabel Data Siswa</h1>
-        <Row className="mb-4">
+      <div style={{ padding: "50px", marginTop: "10%" }}>
+        <h1 style={{ marginBottom: "4%" }}>Tabel Data Siswa</h1>
+        <Row>
           <Col md={4}>
-            <Form.Group controlId="formSearch">
+            <Form.Group controlId="formSearch" style={{ marginLeft: "5%", marginBottom: "2%" }}>
               <Form.Control
                 type="text"
                 placeholder="Search"
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={(e) => handleSearchChange(e.target.value)}
               />
             </Form.Group>
           </Col>
-          <Col md={{ span: 4, offset: 4 }} className="text-right">
-            <Button href="/tambah_siswa" variant="primary" className="btn-sm">
-              <FontAwesomeIcon icon={faPlus} /> Tambah Siswa
-            </Button>
+          <Col md={8} className="text-right">
+            {/* Adjusted the link to match your requirement for adding data */}
+            <a href="/tambah_siswa" className="btn btn-primary" style={{ textDecoration: "none", color: "white" }}>
+              <FontAwesomeIcon icon={faPlus} />
+            </a>
           </Col>
         </Row>
-        <Table striped bordered hover responsive>
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Name Siswa</th>
-              <th>NISN</th>
-              <th>Alamat</th>
-              <th>Jurusan</th>
-              <th>Umur</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentUsers.map((user, index) => (
-              <tr key={user.id}>
-                <td>{index + 1 + (currentPage - 1) * usersPerPage}</td>
-                <td>{user.nama_siswa}</td>
-                <td>{user.nisn}</td>
-                <td>{user.alamat}</td>
-                <td>{user.jurusan}</td>
-                <td>{user.umur}</td>
-                <td>
-                  <div style={{ display: "flex", gap: "10px" }}>
-                    <button
-                      className="btn-edit"
-                      onClick={() => history.push(`/update_siswa/${user.id}`)}
-                    >
-                      <FontAwesomeIcon icon={faPenSquare} />
-                    </button>
-                    <button
-                      className="btn-delete"
-                      onClick={() => handleDelete(user.id)}
-                    >
-                      <FontAwesomeIcon icon={faTrashAlt} />
-                    </button>
-                  </div>
-                </td>
+        <div className="table-responsive" style={{ marginTop: "8px", marginLeft: "20px" }}>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Name Siswa</th>
+                <th>NISN</th>
+                <th>Alamat</th>
+                <th>Jurusan</th>
+                <th>Umur</th>
+                {/* Assuming you want to include actions here */}
+                <th>Aksi</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-        <Pagination className="justify-content-center">
-          {[
-            ...Array(Math.ceil(filteredUsers.length / usersPerPage)).keys(),
-          ].map((number) => (
-            <Pagination.Item
-              key={number + 1}
-              active={number + 1 === currentPage}
-              onClick={() => paginate(number + 1)}
-            >
+            </thead>
+            <tbody>
+              {currentUsers.map((user, index) => (
+                <tr key={user.id}>
+                  <td>{index + 1 + (currentPage - 1) * usersPerPage}</td>
+                  <td>{user.nama_siswa}</td>
+                  <td>{user.nisn}</td>
+                  <td>{user.alamat}</td>
+                  <td>{user.jurusan}</td>
+                  <td>{user.umur}</td>
+                  <td>
+                    {/* Example actions */}
+                    <Button variant="success" style={{ marginRight: "5px" }}>
+                      <FontAwesomeIcon icon={faPenSquare} />
+                    </Button>
+                    <Button variant="danger">
+                      <FontAwesomeIcon icon={faTrashAlt} />
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
+        <Pagination>
+          {[...Array(Math.ceil(filteredUsers.length / usersPerPage)).keys()].map(number => (
+            <Pagination.Item key={number + 1} active={number + 1 === currentPage} onClick={() => setCurrentPage(number + 1)}>
               {number + 1}
             </Pagination.Item>
           ))}

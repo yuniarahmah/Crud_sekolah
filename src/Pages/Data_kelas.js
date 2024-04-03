@@ -52,11 +52,13 @@ function Data_kelas() {
               Authorization: `Bearer ${token}`,
             },
           });
-          Swal.fire("Hapus!", "Data sudah terhapus secara permanen", "success").then(
-            () => {
-              setKelas(kelas.filter((kelas) => kelas.id !== id));
-            }
-          );
+          Swal.fire(
+            "Hapus!",
+            "Data sudah terhapus secara permanen",
+            "success"
+          ).then(() => {
+            setKelas(kelas.filter((kelas) => kelas.id !== id));
+          });
         } catch (error) {
           Swal.fire(
             "Error",

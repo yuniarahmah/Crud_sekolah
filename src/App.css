@@ -291,3 +291,39 @@
 .btn-kunjungi:hover {
   background-color: rgba(200, 14, 14, 0.7); /* Contoh: warna oranye dengan transparansi untuk hover */
 }
+
+/* css card */
+/* Media query untuk layar yang lebih kecil */
+@media (max-width: 768px) {
+  .card {
+    margin-left: 5%!important;
+    margin-right: 5%!important;
+    width: 90%!important; /* Sesuaikan lebar kartu untuk layar yang lebih kecil */
+  }
+}
+
+/* card text */
+.main-heading {
+  font-size: 32px; /* Ukuran font yang lebih besar karena ini adalah h1 */
+  font-weight: lighter; /* Membuat teks tebal */
+  text-transform: uppercase; /* Mengubah semua teks menjadi huruf kapital */
+  color: #333; /* Warna teks, dapat disesuaikan */
+  font-family: 'Roboto', sans-serif; /* Jenis font, sesuaikan dengan desain */
+  text-align: center; /* Menengahkan teks */
+  margin-top: 2%; /* Jarak atas, sesuaikan dengan kebutuhan */
+  /* padding: 5%; Padding, sesuaikan dengan kebutuhan */
+}
+
+.card-hover {
+  width: 30rem;
+  height: 40rem;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bayangan lebih ringan saat tidak hover */
+  margin-bottom: 20px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease-in-out; /* Tambahkan transisi untuk efek smooth */
+}
+
+.card-hover:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Bayangan lebih gelap saat hover */
+}

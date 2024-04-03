@@ -50,11 +50,13 @@ function DataGuru() {
               Authorization: `Bearer ${token}`,
             },
           });
-          Swal.fire("Hapus!", "Data sudah terhapus secara permanen", "success").then(
-            () => {
-              setGuru(guru.filter((guru) => guru.id !== id));
-            }
-          );
+          Swal.fire(
+            "Hapus!",
+            "Data sudah terhapus secara permanen",
+            "success"
+          ).then(() => {
+            setGuru(guru.filter((guru) => guru.id !== id));
+          });
         } catch (error) {
           Swal.fire(
             "Error",
@@ -87,7 +89,7 @@ function DataGuru() {
     <>
       <Navbarcom />
       <div style={{ padding: "50px", marginTop: "10%" }}>
-      <h1 style={{ marginBottom: '4%' }}> Tabel Data Guru</h1>
+        <h1 style={{ marginBottom: "4%" }}> Tabel Data Guru</h1>
         <Row>
           <Col md={4}>
             <Form.Group
@@ -122,86 +124,82 @@ function DataGuru() {
             </a>{" "}
           </Col>
         </Row>
-        <Table
-          striped
-          bordered
-          hover
-          style={{
-            marginTop: "8px",
-            marginLeft: "20px",
-            width: "calc(95% - 10px)",
-          }}
+        <div
+          className="table-responsive"
+          style={{ marginTop: "8px", marginLeft: "20px" }}
         >
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Nama Guru</th>
-              <th>Nik</th>
-              <th>Alamat Guru</th>
-              <th>Nomer Hp</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentGuru.map(
-              (
-                guru,
-                index // Corrected from currentguru to currentGuru
-              ) => (
-                <tr key={guru.id}>
-                  <td>{index + 1 + (currentPage - 1) * guruPerPage}</td>{" "}
-                  {/* Adjusted index to show correct numbering */}
-                  <td>{guru.nama_guru}</td>
-                  <td>{guru.nik}</td>
-                  <td>{guru.alamat_guru}</td>
-                  <td>{guru.nomer_hp}</td>
-                  <td
-                    style={{
-                      display: "flex",
-                      gap: "10px",
-                      // justifyContent: "center",
-                    }}
-                  >
-                    <a
-                      href={`/update_guru/${guru.id}`}
-                      className="btn btn-success"
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama Guru</th>
+                <th>Nik</th>
+                <th>Alamat Guru</th>
+                <th>Nomer Hp</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentGuru.map(
+                (
+                  guru,
+                  index // Corrected from currentguru to currentGuru
+                ) => (
+                  <tr key={guru.id}>
+                    <td>{index + 1 + (currentPage - 1) * guruPerPage}</td>{" "}
+                    {/* Adjusted index to show correct numbering */}
+                    <td>{guru.nama_guru}</td>
+                    <td>{guru.nik}</td>
+                    <td>{guru.alamat_guru}</td>
+                    <td>{guru.nomer_hp}</td>
+                    <td
                       style={{
-                        textDecoration: "none",
-                        color: "white",
-                        display: "inline-flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        padding: "0.375rem 0.75rem",
-                        fontSize: "1rem",
-                        lineHeight: 1.5,
-                        borderRadius: "0.25rem",
+                        display: "flex",
+                        gap: "10px",
+                        // justifyContent: "center",
                       }}
                     >
-                      <FontAwesomeIcon
-                        icon={faPenSquare}
-                        style={{ marginRight: "2px" }}
-                      />
-                    </a>
-                    <Button
-                      variant="danger"
-                      onClick={() => handleDelete(guru.id)}
-                      style={{
-                        border: "none",
-                        borderRadius: "0.25rem",
-                        color: "white",
-                      }}
-                    >
-                      <FontAwesomeIcon
-                        icon={faTrashAlt}
-                        style={{ marginRight: "2px" }}
-                      />
-                    </Button>
-                  </td>
-                </tr>
-              )
-            )}
-          </tbody>
-        </Table>
+                      <a
+                        href={`/update_guru/${guru.id}`}
+                        className="btn btn-success"
+                        style={{
+                          textDecoration: "none",
+                          color: "white",
+                          display: "inline-flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          padding: "0.375rem 0.75rem",
+                          fontSize: "1rem",
+                          lineHeight: 1.5,
+                          borderRadius: "0.25rem",
+                        }}
+                      >
+                        <FontAwesomeIcon
+                          icon={faPenSquare}
+                          style={{ marginRight: "2px" }}
+                        />
+                      </a>
+                      <Button
+                        variant="danger"
+                        onClick={() => handleDelete(guru.id)}
+                        style={{
+                          border: "none",
+                          borderRadius: "0.25rem",
+                          color: "white",
+                        }}
+                      >
+                        <FontAwesomeIcon
+                          icon={faTrashAlt}
+                          style={{ marginRight: "2px" }}
+                        />
+                      </Button>
+                    </td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </Table>
+        </div>
         <Pagination>
           {[...Array(Math.ceil(guru.length / guruPerPage)).keys()].map(
             (number) => (
