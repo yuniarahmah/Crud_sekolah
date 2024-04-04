@@ -100,7 +100,7 @@ function DataGuru() {
                 type="text"
                 placeholder="Search"
                 value={searchTerm}
-                onChange={(e) => handleSearchChange(e.target.value)}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
             </Form.Group>
           </Col>

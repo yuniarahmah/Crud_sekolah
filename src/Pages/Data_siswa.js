@@ -19,22 +19,71 @@ function Data_siswa() {
   const history = useHistory();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/data_siswa", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((res) => {
-        setUsers(res.data);
-      })
-      .catch((error) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/api/data_siswa",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        setUsers(response.data);
+      } catch (error) {
         Swal.fire("Error", "Terjadi kesalahan: " + error.message, "error");
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
-  const filteredUsers = users.filter((user) =>
-    user.nama_siswa.toLowerCase().includes(searchTerm.toLowerCase())
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: "Yakin ingin menghapus data ini?",
+      text: "Jika dihapus maka data tidak dapat dipulihkan!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, hapus data ini!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`http://localhost:8080/api/data_siswa/${id}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          });
+          setUsers(users.filter((user) => user.id !== id));
+          Swal.fire(
+            "Hapus!",
+            "Data sudah terhapus secara permanen.",
+            "success"
+          );
+        } catch (error) {
+          Swal.fire(
+            "Error",
+            "Could not delete the user: " + error.message,
+            "error"
+          );
+        }
+      }
+    });
+  };
+
+  const filteredUsers = users.filter(
+    (user) =>
+      user.nama_siswa.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.nisn.toString().toLowerCase().includes(searchTerm.toLowerCase()) || // Assuming NISN is numeric
+      user.alamat.toString().toLowerCase().includes(searchTerm.toLowerCase()) || // Assuming NISN is numeric
+      user.jurusan
+        .toString()
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()) || // Assuming NISN is numeric
+      user.hobi.toString().toLowerCase().includes(searchTerm.toLowerCase()) || // Assuming NISN is numeric
+      user.umur.toString().toLowerCase().includes(searchTerm.toLowerCase()) // Assuming NISN is numeric
+    // Add any other fields you want to include in the search
   );
 
   const indexOfLastUser = currentPage * usersPerPage;
@@ -54,23 +103,33 @@ function Data_siswa() {
         <h1 style={{ marginBottom: "4%" }}>Tabel Data Siswa</h1>
         <Row>
           <Col md={4}>
-            <Form.Group controlId="formSearch" style={{ marginLeft: "5%", marginBottom: "2%" }}>
+            <Form.Group
+              controlId="formSearch"
+              style={{ marginLeft: "5%", marginBottom: "2%" }}
+            >
               <Form.Control
                 type="text"
                 placeholder="Search"
                 value={searchTerm}
-                onChange={(e) => handleSearchChange(e.target.value)}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
             </Form.Group>
           </Col>
           <Col md={8} className="text-right">
             {/* Adjusted the link to match your requirement for adding data */}
-            <a href="/tambah_siswa" className="btn btn-primary" style={{ textDecoration: "none", color: "white" }}>
+            <a
+              href="/tambah_siswa"
+              className="btn btn-primary"
+              style={{ textDecoration: "none", color: "white" }}
+            >
               <FontAwesomeIcon icon={faPlus} />
             </a>
           </Col>
         </Row>
-        <div className="table-responsive" style={{ marginTop: "8px", marginLeft: "20px" }}>
+        <div
+          className="table-responsive"
+          style={{ marginTop: "8px", marginLeft: "20px" }}
+        >
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -79,8 +138,8 @@ function Data_siswa() {
                 <th>NISN</th>
                 <th>Alamat</th>
                 <th>Jurusan</th>
+                <th>Hobi</th>
                 <th>Umur</th>
-                {/* Assuming you want to include actions here */}
                 <th>Aksi</th>
               </tr>
             </thead>
@@ -92,14 +151,48 @@ function Data_siswa() {
                   <td>{user.nisn}</td>
                   <td>{user.alamat}</td>
                   <td>{user.jurusan}</td>
+                  <td>{user.hobi}</td>
                   <td>{user.umur}</td>
-                  <td>
-                    {/* Example actions */}
-                    <Button variant="success" style={{ marginRight: "5px" }}>
-                      <FontAwesomeIcon icon={faPenSquare} />
-                    </Button>
-                    <Button variant="danger">
-                      <FontAwesomeIcon icon={faTrashAlt} />
+                  <td
+                    style={{
+                      display: "flex",
+                      gap: "10px",
+                      // justifyContent: "center",
+                    }}
+                  >
+                    <a
+                      href={`/data_siswa/${user.id}`}
+                      className="btn btn-success"
+                      style={{
+                        textDecoration: "none",
+                        color: "white",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        padding: "0.375rem 0.75rem",
+                        fontSize: "1rem",
+                        lineHeight: 1.5,
+                        borderRadius: "0.25rem",
+                      }}
+                    >
+                      <FontAwesomeIcon
+                        icon={faPenSquare}
+                        style={{ marginRight: "2px" }}
+                      />
+                    </a>
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDelete(user.id)}
+                      style={{
+                        border: "none",
+                        borderRadius: "0.25rem",
+                        color: "white",
+                      }}
+                    >
+                      <FontAwesomeIcon
+                        icon={faTrashAlt}
+                        style={{ marginRight: "2px" }}
+                      />
                     </Button>
                   </td>
                 </tr>
@@ -108,8 +201,14 @@ function Data_siswa() {
           </Table>
         </div>
         <Pagination>
-          {[...Array(Math.ceil(filteredUsers.length / usersPerPage)).keys()].map(number => (
-            <Pagination.Item key={number + 1} active={number + 1 === currentPage} onClick={() => setCurrentPage(number + 1)}>
+          {[
+            ...Array(Math.ceil(filteredUsers.length / usersPerPage)).keys(),
+          ].map((number) => (
+            <Pagination.Item
+              key={number + 1}
+              active={number + 1 === currentPage}
+              onClick={() => setCurrentPage(number + 1)}
+            >
               {number + 1}
             </Pagination.Item>
           ))}

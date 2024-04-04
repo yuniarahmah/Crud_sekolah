@@ -198,6 +198,11 @@
   color: #eceff1; /* Warna teks untuk item aktif */
 }
 
+.nav-item.active .nav-link,
+.nav-link:hover {
+  background-color: black; /* Contoh warna background untuk hover dan halaman aktif */
+  color: #000; /* Contoh warna teks untuk hover dan halaman aktif */
+}
 
 /* css animasi */
 @keyframes slideIn {
@@ -326,4 +331,10 @@
 
 .card-hover:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Bayangan lebih gelap saat hover */
+}
+
+.space.active {
+  text-decoration: underline;
+  /* Atau untuk garis lebih custom */
+  border-bottom: 2px solid #007bff; /* Ganti dengan warna yang diinginkan */
 }

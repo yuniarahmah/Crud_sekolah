@@ -8,28 +8,39 @@ import {
   faPeopleRoof,
   faPaste,
 } from "@fortawesome/free-solid-svg-icons";
+import {
+  useHistory,
+  useLocation,
+} from "react-router-dom/cjs/react-router-dom.min";
+import Swal from "sweetalert2";
 
 function Navbarcom() {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  // const history = useHistory();
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
 
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleSidebar = () => setIsOpen(!isOpen);
 
-  const closeSidebar = () => {
-    setIsOpen(false);
-  };
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-    // Lakukan logika autentikasi di sini, seperti memanggil API login
-  };
+  const closeSidebar = () => setIsOpen(false);
 
   const handleLogout = () => {
-    setIsLoggedIn(false);
-    localStorage.removeItem("token"); // Hapus token dari local storage
-    // Lakukan tambahan logika logout jika perlu, seperti memanggil API logout
+    Swal.fire({
+      title: "Apakah Anda yakin?",
+      text: "Anda akan keluar dari aplikasi",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, keluar!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setIsLoggedIn(false);
+        localStorage.removeItem("token");
+        window.location.href = "/";
+        Swal.fire("Logged out!", "Anda telah berhasil keluar.", "success");
+      }
+    });
   };
 
   useEffect(() => {
@@ -45,20 +56,17 @@ function Navbarcom() {
 
     window.addEventListener("click", closeOnOutsideClick);
 
-    return () => {
-      window.removeEventListener("click", closeOnOutsideClick);
-    };
+    return () => window.removeEventListener("click", closeOnOutsideClick);
   }, [isOpen]);
 
-  const backgroundColor = isOpen ? "#008DDA" : "";
+  const isActive = (path) => location.pathname === path;
 
   return (
     <>
       <nav
         style={{ position: "fixed", top: "5px", width: "100%", zIndex: 1000 }}
       >
-        <div style={{ backgroundColor }}>
-          {/* Navbar */}
+        <div style={{ backgroundColor: isOpen ? "#008DDA" : "" }}>
           <div id="viewport" className={isOpen ? "open" : ""}>
             <div
               id="sidebar"
@@ -67,18 +75,19 @@ function Navbarcom() {
                 position: "fixed",
                 top: 0,
                 left: isOpen ? 0 : "-250px",
+                transition: "left 0.5s ease",
               }}
             >
               <header
-                style={{ paddingTop: "8px", paddingBottom: "8px" }}
                 className="px-4"
+                style={{ paddingTop: "8px", paddingBottom: "8px" }}
               >
                 <div className="d-flex align-items-center">
                   <img
                     src={Logo}
                     alt="Logo"
-                    width="70px"
-                    height="60px"
+                    width="70"
+                    height="60"
                     className="mr-3"
                   />
                   <p
@@ -90,41 +99,46 @@ function Navbarcom() {
                 </div>
               </header>
               <ul className="nav flex-column">
-                {/* Sidebar items */}
-                <li className="nav-item">
-                  <a href="/dashboard" className="nav-link">
-                    <FontAwesomeIcon icon={faChartSimple} /> Dashboard
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="/guru" className="nav-link">
-                    <FontAwesomeIcon icon={faUserTie} /> Guru
-                  </a>
-                </li>
-                <li className="nav-item">
+                <li
+                  className={`nav-item ${isActive("/siswa") ? "active" : ""}`}
+                >
                   <a href="/siswa" className="nav-link">
                     <FontAwesomeIcon icon={faUser} /> Murid
                   </a>
                 </li>
-                <li className="nav-item">
+                <li className={`nav-item ${isActive("/guru") ? "active" : ""}`}>
+                  <a href="/guru" className="nav-link">
+                    <FontAwesomeIcon icon={faUserTie} /> Guru
+                  </a>
+                </li>
+                <li
+                  className={`nav-item ${isActive("/kelas") ? "active" : ""}`}
+                >
                   <a href="/kelas" className="nav-link">
                     <FontAwesomeIcon icon={faPeopleRoof} /> Kelas
                   </a>
                 </li>
-                <li className="nav-item">
+                <li
+                  className={`nav-item ${isActive("/mapel") ? "active" : ""}`}
+                >
                   <a href="/mapel" className="nav-link">
                     <FontAwesomeIcon icon={faPaste} /> Mapel
                   </a>
                 </li>
                 {isLoggedIn ? (
                   <li className="nav-item">
-                    {/* Menambahkan onClick untuk handleLogout */}
-                    <a href="/" onClick={handleLogout} className="nav-link">
+                    <a
+                      onClick={handleLogout}
+                      className="nav-link"
+                      style={{ cursor: "pointer" }}
+                    >
                       Logout
                     </a>
                   </li>
                 ) : (
-                  <li className="nav-item">
+                  <li
+                    className={`nav-item ${isActive("/login") ? "active" : ""}`}
+                  >
                     <a href="/login" className="nav-link">
                       Login
                     </a>
@@ -182,31 +196,42 @@ function Navbarcom() {
               <div className="navbar-links">
                 {!isOpen && (
                   <>
-                    <a href="/dashboard" className="space">
-                      Dashboard
-                    </a>
-                    <a href="/guru" className="space">
-                      Guru
-                    </a>
-                    <a href="/siswa" className="space">
+                    <a
+                      href="/siswa"
+                      className={`space ${
+                        location.pathname === "/siswa" ? "active" : ""
+                      }`}
+                    >
                       Murid
                     </a>
-                    <a href="/kelas" className="space">
+                    <a
+                      href="/guru"
+                      className={`space ${
+                        location.pathname === "/guru" ? "active" : ""
+                      }`}
+                    >
+                      Guru
+                    </a>
+                    <a
+                      href="/kelas"
+                      className={`space ${
+                        location.pathname === "/kelas" ? "active" : ""
+                      }`}
+                    >
                       Kelas
                     </a>
-                    <a href="/mapel" className="space">
+                    <a
+                      href="/mapel"
+                      className={`space ${
+                        location.pathname === "/mapel" ? "active" : ""
+                      }`}
+                    >
                       Mapel
                     </a>
-                    {/* <a
-                    href="/login"
-                    className="space"
-                    onClick={isLoggedIn ? handleLogout : handleLogin}
-                  >
-                    {isLoggedIn ? "Logout" : "Login"}
-                  </a> */}
                   </>
                 )}
               </div>
+
               <button
                 className="btn-toggle"
                 onClick={toggleSidebar}

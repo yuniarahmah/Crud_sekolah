@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button, Card, Form } from 'react-bootstrap';
+import { Button, Card, Form, Container, Row, Col } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { useParams } from 'react-router-dom';
 
@@ -54,20 +54,17 @@ function UpdateItemForm() {
   const updateStudent = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`${API_SISWA}/${id}`, formData, {
+      await axios.put(`${API_SISWA}/${id}`, formData, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
       });
-      // Use Swal.fire to show a success message without a button, and with a timer.
       Swal.fire({
         title: 'Success!',
         text: 'Data berhasil diubah!',
         icon: 'success',
-        timer: 1200, // Set the timer to 1200ms
-        showConfirmButton: false, // Hide the confirm button
-        willClose: () => {
-          // Redirect after the Swal closes
-          window.location.href = '/siswa';
-        }
+        timer: 1200,
+        showConfirmButton: false,
+      }).then(() => {
+        window.location.href = '/siswa';
       });
     } catch (error) {
       console.error('Update error:', error.response || error);
@@ -76,87 +73,122 @@ function UpdateItemForm() {
   };
 
   return (
-    <Card className="mx-auto my-3 p-4" style={{ maxWidth: '900px' }}>
-      <h2 className="text-center mb-4">Edit Data Siswa</h2>
-      <Form onSubmit={updateStudent}>
-        {/* Repeat for each form field */}
-        <Form.Group controlId="nama_siswa">
-          <Form.Label>Nama Siswa</Form.Label>
-          <Form.Control
-            type="text"
-            name="nama_siswa"
-            value={formData.nama_siswa}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group controlId="nisn">
-          <Form.Label>NISN:</Form.Label>
-          <Form.Control
-            type="text"
-            name="nisn"
-            value={formData.nisn}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group controlId="kelas">
-          <Form.Label>Kelas:</Form.Label>
-          <Form.Control
-            type="text"
-            name="kelas"
-            value={formData.kelas}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group controlId="jurusan">
-          <Form.Label>Jurusan:</Form.Label>
-          <Form.Control
-            type="text"
-            name="jurusan"
-            value={formData.jurusan}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group controlId="alamat">
-          <Form.Label>Alamat:</Form.Label>
-          <Form.Control
-            type="text"
-            name="alamat"
-            value={formData.alamat}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group controlId="hobi">
-          <Form.Label>Hobi:</Form.Label>
-          <Form.Control
-            type="text"
-            name="hobi"
-            value={formData.hobi}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group controlId="umur">
-          <Form.Label>Umur:</Form.Label>
-          <Form.Control
-            type="text"
-            name="umur"
-            value={formData.umur}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <div className="text-center my-2">
-          <Button variant="primary" type="submit">
-            Simpan
-          </Button>
-        </div>
-      </Form>
-    </Card>
+    <Container className="mt-5">
+      <Row className="justify-content-md-center">
+        <Col xs={12} md={8} lg={6}>
+          <Card className="p-4">
+            <h2 className="text-center mb-4">Edit Data Siswa</h2>
+            <Form onSubmit={updateStudent}>
+              {/* Adapt the Form.Group structure as seen in the example for each form field */}
+              {/* Example for one field: */}
+              <Form.Group as={Row} className="mb-3" controlId="nama_siswa">
+                <Form.Label column sm="3">
+                  Nama Siswa
+                </Form.Label>
+                <Col sm="9">
+                  <Form.Control
+                    type="text"
+                    name="nama_siswa"
+                    value={formData.nama_siswa}
+                    onChange={handleChange}
+                    required
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group as={Row} className="mb-3" controlId="nisn">
+                <Form.Label column sm="3">
+                  Nisn
+                </Form.Label>
+                <Col sm="9">
+                  <Form.Control
+                    type="text"
+                    name="nisn"
+                    value={formData.nisn}
+                    onChange={handleChange}
+                    required
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group as={Row} className="mb-3" controlId="kelas">
+                <Form.Label column sm="3">
+                  Kelas
+                </Form.Label>
+                <Col sm="9">
+                  <Form.Control
+                    type="text"
+                    name="kelas"
+                    value={formData.kelas}
+                    onChange={handleChange}
+                    required
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group as={Row} className="mb-3" controlId="jurusan">
+                <Form.Label column sm="3">
+                  Jurusan
+                </Form.Label>
+                <Col sm="9">
+                  <Form.Control
+                    type="text"
+                    name="jurusan"
+                    value={formData.jurusan}
+                    onChange={handleChange}
+                    required
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group as={Row} className="mb-3" controlId="alamat">
+                <Form.Label column sm="3">
+                  Alamat
+                </Form.Label>
+                <Col sm="9">
+                  <Form.Control
+                    type="text"
+                    name="alamat"
+                    value={formData.alamat}
+                    onChange={handleChange}
+                    required
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group as={Row} className="mb-3" controlId="hobi">
+                <Form.Label column sm="3">
+                  Hobi
+                </Form.Label>
+                <Col sm="9">
+                  <Form.Control
+                    type="text"
+                    name="hobi"
+                    value={formData.hobi}
+                    onChange={handleChange}
+                    required
+                  />
+                </Col>
+              </Form.Group>
+              <Form.Group as={Row} className="mb-3" controlId="umur">
+                <Form.Label column sm="3">
+                  Umur
+                </Form.Label>
+                <Col sm="9">
+                  <Form.Control
+                    type="text"
+                    name="umur"
+                    value={formData.umur}
+                    onChange={handleChange}
+                    required
+                  />
+                </Col>
+              </Form.Group>
+              {/* Repeat the structure above for the remaining fields: nisn, kelas, jurusan, alamat, hobi, umur */}
+
+              <div className="text-center my-2">
+                <Button variant="primary" type="submit">Simpan</Button>
+              </div>
+            </Form>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

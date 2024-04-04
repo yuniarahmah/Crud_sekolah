@@ -71,7 +71,6 @@ function TambahSiswa() {
 
   return (
     <>
-    <></>
       <Container style={{ paddingTop: "10vh", paddingBottom: "5vh" }}>
         {/* Menambahkan padding atas dan bawah */}
         <Row>

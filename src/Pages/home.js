@@ -11,7 +11,7 @@ import foto5 from "../asset/kegiatan 4.jpg"; // Perbarui jalur sesuai kebutuhan
 import foto6 from "../asset/kegiatan 3.jpg"; // Perbarui jalur sesuai kebutuhan
 import "../App.css";
 import Aos from "aos";
-import 'aos/dist/aos.css'; // Impor stylesheet AOS
+import "aos/dist/aos.css"; // Impor stylesheet AOS
 import { useEffect } from "react";
 
 function Home() {
@@ -85,22 +85,22 @@ function Home() {
         style={{
           padding: "5%",
           display: "flex",
-          gap: "20px", // Sesuaikan gap jika diperlukan
+          gap: "20px",
           flexWrap: "wrap",
           alignItems: "center",
-          justifyContent: " center",
+          justifyContent: "center",
           height: "10%",
         }}
       >
         <Card
-          bg="danger" // Represents Red
-          key="Red1" // Memastikan setiap key unik
-          text="white"
+          key="department" // Ubah menjadi lebih deskriptif
           style={{
+            backgroundColor: "#7ab8f2", // Biru muda yang tidak terlalu terang
+            color: "white", // Warna teks
             width: "25rem",
             textAlign: "center",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.4)",
-          }} // Hapus marginLeft
+          }}
           className="card mb-2"
         >
           <Card.Body>
@@ -109,14 +109,14 @@ function Home() {
           </Card.Body>
         </Card>
         <Card
-          bg="danger" // Represents Red
-          key="Red1" // Memastikan setiap key unik
-          text="white"
+          key="extracurricular" // Ubah menjadi lebih deskriptif
           style={{
+            backgroundColor: "#7ab8f2",
+            color: "white",
             width: "25rem",
             textAlign: "center",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.4)",
-          }} // Hapus marginLeft
+          }}
           className="card mb-2"
         >
           <Card.Body>
@@ -125,14 +125,14 @@ function Home() {
           </Card.Body>
         </Card>
         <Card
-          bg="danger" // Represents Red
-          key="Red1" // Memastikan setiap key unik
-          text="white"
+          key="class" // Ubah menjadi lebih deskriptif
           style={{
+            backgroundColor: "#7ab8f2",
+            color: "white",
             width: "25rem",
             textAlign: "center",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.4)",
-          }} // Hapus marginLeft
+          }}
           className="card mb-2"
         >
           <Card.Body>
@@ -141,14 +141,14 @@ function Home() {
           </Card.Body>
         </Card>
         <Card
-          bg="danger" // Represents Red
-          key="Red1" // Memastikan setiap key unik
-          text="white"
+          key="teacher" // Ubah menjadi lebih deskriptif
           style={{
+            backgroundColor: "#7ab8f2",
+            color: "white",
             width: "25rem",
             textAlign: "center",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.4)",
-          }} // Hapus marginLeft
+          }}
           className="card mb-2"
         >
           <Card.Body>
@@ -201,12 +201,12 @@ function Home() {
             image={foto3}
           />
           <CardComponent
-            title="Juara Pencak Silat Putra"
+            title="Latihan Gabungan Penggalang binusa"
             // text="Beberapa siswa dari Binanusantara diturunkan di gelanggang kejuaraan Kendal championship meraih juara yang membanggakan"
             image={foto4}
           />
           <CardComponent
-            title="Juara Pencak Silat Putra"
+            title="Kegiatan Hari Santri"
             // text="Beberapa siswa dari Binanusantara diturunkan di gelanggang kejuaraan Kendal championship meraih juara yang membanggakan"
             image={foto5}
           />

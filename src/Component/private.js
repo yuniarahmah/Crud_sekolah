@@ -1,18 +1,14 @@
-import { Route, Redirect } from 'react-router-dom';
-
-const isAuthenticated = () => {
-  // Check if the user is authenticated (you can use your own logic)
-  return localStorage.getItem('email') !== null; // Assuming you store the email in localStorage upon login
-};
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
-      isAuthenticated() ? (
+      localStorage.getItem("token") ? (
         <Component {...props} />
       ) : (
-        <Redirect to="/dashboard" />
+        <Redirect to="/login" />
       )
     }
   />

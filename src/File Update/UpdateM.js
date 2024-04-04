@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Button, Card, Form } from "react-bootstrap";
+import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { useParams, useHistory } from "react-router-dom";
 
@@ -42,10 +42,10 @@ function UpdateMapel() {
     }));
   };
 
-  const updateTeacher = async (e) => {
+  const updateMapel = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`${API_MAPEL}/${id}`, formData, {
+      await axios.put(`${API_MAPEL}/${id}`, formData, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
       });
       // Use Swal.fire to show a success message without a button, and with a timer.
@@ -53,51 +53,66 @@ function UpdateMapel() {
         title: 'Success!',
         text: 'Data berhasil diubah!',
         icon: 'success',
-        timer: 1200, // Set the timer to 1200ms
-        showConfirmButton: false, // Hide the confirm button
-        willClose: () => {
-          // Redirect after the Swal closes
-          window.location.href = '/mapel';
-        }
+        timer: 1200,
+        showConfirmButton: false,
+      }).then(() => {
+        window.location.href = '/mapel';
       });
     } catch (error) {
-      console.error('Update error:', error.response || error);
-      Swal.fire('Error', 'Terjadi kesalahan saat mengupdate data.', 'error');
+      console.error("Update error:", error.response || error);
+      Swal.fire("Error", "Terjadi kesalahan saat mengupdate data.", "error");
     }
   };
 
   return (
-    <Card className="mx-auto my-3 p-4" style={{ maxWidth: "900px" }}>
-      <h2 className="text-center mb-4">Edit Data Mapel</h2>
-      <Form onSubmit={updateTeacher}>
-        {/* Repeat for each form field */}
-        <Form.Group controlId="nama_mapel">
-          <Form.Label>Nama Mapel</Form.Label>
-          <Form.Control
-            type="text"
-            name="nama_mapel"
-            value={formData.nama_mapel}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <Form.Group controlId="nama_guru_mapel">
-          <Form.Label>Nama Guru Mapel</Form.Label>
-          <Form.Control
-            type="text"
-            name="nama_guru_mapel"
-            value={formData.nama_guru_mapel}
-            onChange={handleChange}
-            required
-          />
-        </Form.Group>
-        <div className="text-center my-2">
-          <Button variant="primary" type="submit">
-            Simpan
-          </Button>
-        </div>
-      </Form>
-    </Card>
+    <Container className="mt-5">
+      <Row className="justify-content-md-center">
+        <Col xs={12} md={8} lg={6}>
+          <Card className="p-4">
+            <h2 className="text-center mb-4">Edit Data Mapel</h2>
+            <Form onSubmit={updateMapel}>
+              {/* Dynamically create form fields */}
+
+              <Form.Group as={Row} className="mb-3" controlId="nama_guru_mapel">
+                <Form.Label column sm="3">
+                  Nama Guru Mapel
+                </Form.Label>
+                <Col sm="9">
+                  <Form.Control
+                    type="text"
+                    name="nama_guru_mapel"
+                    value={formData.nama_guru_mapel}
+                    onChange={handleChange}
+                    required
+                  />
+                </Col>
+              </Form.Group>
+              
+              <Form.Group as={Row} className="mb-3" controlId="nama_mapel">
+                <Form.Label column sm="3">
+                  Nama Mapel
+                </Form.Label>
+                <Col sm="9">
+                  <Form.Control
+                    type="text"
+                    name="nama_mapel"
+                    value={formData.nama_mapel}
+                    onChange={handleChange}
+                    required
+                  />
+                </Col>
+              </Form.Group>
+
+              <div className="text-center my-2">
+                <Button variant="primary" type="submit">
+                  Simpan
+                </Button>
+              </div>
+            </Form>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
