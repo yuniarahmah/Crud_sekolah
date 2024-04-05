@@ -28,11 +28,12 @@ function TambahMapel() {
         title: "Success!",
         text: "Mapel berhasil ditambahkan.",
         icon: "success",
-        timer: 2000,
-        timerProgressBar: true,
-        showConfirmButton: false,
-      }).then(() => {
-        history.push("/mapel"); // Redirecting using React Router for smoother page transition
+        timer: 1000, // Timer selama 2000 ms atau 2 detik
+        timerProgressBar: true, // Menampilkan progress bar pada timer
+        showConfirmButton: false, // Tidak menampilkan tombol konfirmasi
+        didClose: () => {
+          window.location.href = "/mapel"; // Arahkan ke halaman "siswa" dengan full page reload
+        },
       });
 
       setNama_mapel("");

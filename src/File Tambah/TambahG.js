@@ -27,11 +27,12 @@ function TambahGuru() {
         title: "Success!",
         text: "Guru berhasil ditambahkan.",
         icon: "success",
-        timer: 2000,
-        timerProgressBar: true,
-        showConfirmButton: false,
-      }).then(() => {
-        history.push("/guru");
+        timer: 1000, // Timer selama 2000 ms atau 2 detik
+        timerProgressBar: true, // Menampilkan progress bar pada timer
+        showConfirmButton: false, // Tidak menampilkan tombol konfirmasi
+        didClose: () => {
+          window.location.href = "/guru"; // Arahkan ke halaman "siswa" dengan full page reload
+        },
       });
 
       setNamaGuru("");

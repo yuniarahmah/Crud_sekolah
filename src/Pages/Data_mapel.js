@@ -51,11 +51,13 @@ function Data_mapel() {
               Authorization: `Bearer ${token}`,
             },
           });
-          Swal.fire("Hapus!", "Data sudah terhapus secara permanen", "success").then(
-            () => {
-              setMapel(mapel.filter((mapel) => mapel.id !== id));
-            }
-          );
+          Swal.fire(
+            "Hapus!",
+            "Data sudah terhapus secara permanen",
+            "success"
+          ).then(() => {
+            setMapel(mapel.filter((mapel) => mapel.id !== id));
+          });
         } catch (error) {
           Swal.fire(
             "Error",
@@ -148,7 +150,7 @@ function Data_mapel() {
           <tbody>
             {currentMapel.map((item, index) => (
               <tr key={item.id}>
-                <td>{index + 1}</td>
+                <td>{(currentPage - 1) * mapelPerPage + index + 1}</td>
                 <td>{item.nama_guru_mapel}</td>
                 <td>{item.nama_mapel}</td>
                 {/* Tambahkan kolom lain di sini sesuai kebutuhan */}
@@ -193,17 +195,26 @@ function Data_mapel() {
           </tbody>
         </Table>
         <Pagination>
-          {[
-            ...Array(Math.ceil(filteredMapel.length / mapelPerPage)).keys(),
-          ].map((number) => (
-            <Pagination.Item
-              key={number + 1}
-              active={number + 1 === currentPage}
-              onClick={() => paginate(number + 1)}
-            >
-              {number + 1}
-            </Pagination.Item>
-          ))}
+          <Pagination.Prev
+            onClick={() => paginate(currentPage - 1)}
+            disabled={currentPage === 1}
+          />
+          {Array.from(
+            { length: Math.ceil(mapel.length / mapelPerPage) },
+            (_, i) => (
+              <Pagination.Item
+                key={i + 1}
+                active={i + 1 === currentPage}
+                onClick={() => paginate(i + 1)}
+              >
+                {i + 1}
+              </Pagination.Item>
+            )
+          )}
+          <Pagination.Next
+            onClick={() => paginate(currentPage + 1)}
+            disabled={currentPage === Math.ceil(mapel.length / mapelPerPage)}
+          />
         </Pagination>
       </div>
     </>
