@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Table, Pagination, Form, Button, Row, Col } from "react-bootstrap";
+import { table, Pagination, Form, Button, Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -25,6 +25,7 @@ function DataGuru() {
         },
       })
       .then((res) => {
+        console.log("Data received:",res.data); // Tambahkan ini untuk melihat data yang diterima
         setGuru(res.data);
       })
       .catch((error) => {
@@ -89,130 +90,98 @@ function DataGuru() {
     <>
       <Navbarcom />
       <div style={{ padding: "50px", marginTop: "10%" }}>
-        <h1 style={{ marginBottom: "4%" }}> Tabel Data Guru</h1>
+        <h1 style={{ marginBottom: "4%" }}>Tabel Data Guru</h1>
         <Row>
-          <Col md={4}>
-            <Form.Group
-              controlId="formSearch"
-              style={{ marginLeft: "5%", marginBottom: "2%" }}
-            >
-              <Form.Control
-                type="text"
-                placeholder="Search"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </Form.Group>
-          </Col>
-          <Col md={8} className="text-right">
-            <a
-              href="/tambah_guru"
-              className="btn btn-primary" // Use Bootstrap primary button class
-              style={{
-                textDecoration: "none", // Remove underline from link
-                color: "white", // Set text color to white for visibility
-                display: "inline-flex", // Align items in a flex container
-                alignItems: "center", // Center items vertically
-                justifyContent: "center", // Center items horizontally
-                padding: "0.375rem 0.75rem", // Adjust padding to match Bootstrap buttons
-                fontSize: "1.5rem", // Adjust font size to match Bootstrap buttons
-                lineHeight: 1.8, // Adjust line height to match Bootstrap buttons
-                borderRadius: "0.25rem", // Set border radius to match Bootstrap buttons
-              }}
-            >
-              <FontAwesomeIcon icon={faPlus} />
-            </a>{" "}
+          <Col md={12}>
+            <div className="table-responsive" id="wrapper">
+              <div className="d-flex justify-content-between mb-2">
+                <Form.Group controlId="formSearch" className="mb-0">
+                  <Form.Control
+                    type="text"
+                    placeholder="Search"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                </Form.Group>
+                <a
+                  href="/tambah_guru"
+                  className="btn btn-primary"
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  <FontAwesomeIcon icon={faPlus} /> Tambah Guru
+                </a>
+              </div>
+              <table id="keywords" cellSpacing="0" cellPadding="0">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Nama Guru</th>
+                    <th>Mapel</th>
+                    <th>Nik</th>
+                    <th>Alamat Guru</th>
+                    <th>Nomer Hp</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentGuru.map((guru, index) => (
+                    <tr key={guru.id}>
+                      <td>{index + 1 + (currentPage - 1) * guruPerPage}</td>
+                      <td>{guru.nama_guru}</td>
+                      <td>
+                        {guru.mapel ? guru.mapel.namaMapel : "Tidak Tersedia"}
+                      </td>
+                      <td>{guru.nik}</td>
+                      <td>{guru.alamat_guru}</td>
+                      <td>{guru.nomer_hp}</td>
+                      <td style={{ display: "flex", gap: "10px" }}>
+                        <a
+                          href={`/update_guru/${guru.id}`}
+                          className="btn btn-success"
+                          style={{ textDecoration: "none", color: "white" }}
+                        >
+                          <FontAwesomeIcon icon={faPenSquare} />
+                        </a>
+                        <Button
+                          variant="danger"
+                          onClick={() => handleDelete(guru.id)}
+                        >
+                          <FontAwesomeIcon icon={faTrashAlt} />
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div className="d-flex justify-content-center mt-4">
+                <Pagination>
+                  <Pagination.Prev
+                    onClick={() => paginate(currentPage - 1)}
+                    disabled={currentPage === 1}
+                  />
+                  {Array.from(
+                    { length: Math.ceil(guru.length / guruPerPage) },
+                    (_, i) => (
+                      <Pagination.Item
+                        key={i + 1}
+                        active={i + 1 === currentPage}
+                        onClick={() => paginate(i + 1)}
+                      >
+                        {i + 1}
+                      </Pagination.Item>
+                    )
+                  )}
+                  <Pagination.Next
+                    onClick={() => paginate(currentPage + 1)}
+                    disabled={
+                      currentPage === Math.ceil(guru.length / guruPerPage)
+                    }
+                  />
+                </Pagination>
+              </div>
+            </div>
           </Col>
         </Row>
-        <div
-          className="table-responsive"
-          style={{ marginTop: "8px", marginLeft: "20px" }}
-        >
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Nama Guru</th>
-                <th>Nik</th>
-                <th>Alamat Guru</th>
-                <th>Nomer Hp</th>
-                <th>Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentGuru.map(
-                (
-                  guru,
-                  index // Corrected from currentguru to currentGuru
-                ) => (
-                  <tr key={guru.id}>
-                    <td>{index + 1 + (currentPage - 1) * guruPerPage}</td>{" "}
-                    {/* Adjusted index to show correct numbering */}
-                    <td>{guru.nama_guru}</td>
-                    <td>{guru.nik}</td>
-                    <td>{guru.alamat_guru}</td>
-                    <td>{guru.nomer_hp}</td>
-                    <td
-                      style={{
-                        display: "flex",
-                        gap: "10px",
-                        // justifyContent: "center",
-                      }}
-                    >
-                      <a
-                        href={`/update_guru/${guru.id}`}
-                        className="btn btn-success"
-                        style={{
-                          textDecoration: "none",
-                          color: "white",
-                          display: "inline-flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          padding: "0.375rem 0.75rem",
-                          fontSize: "1rem",
-                          lineHeight: 1.5,
-                          borderRadius: "0.25rem",
-                        }}
-                      >
-                        <FontAwesomeIcon
-                          icon={faPenSquare}
-                          style={{ marginRight: "2px" }}
-                        />
-                      </a>
-                      <Button
-                        variant="danger"
-                        onClick={() => handleDelete(guru.id)}
-                        style={{
-                          border: "none",
-                          borderRadius: "0.25rem",
-                          color: "white",
-                        }}
-                      >
-                        <FontAwesomeIcon
-                          icon={faTrashAlt}
-                          style={{ marginRight: "2px" }}
-                        />
-                      </Button>
-                    </td>
-                  </tr>
-                )
-              )}
-            </tbody>
-          </Table>
-        </div>
-        <Pagination>
-          {[...Array(Math.ceil(guru.length / guruPerPage)).keys()].map(
-            (number) => (
-              <Pagination.Item
-                key={number + 1}
-                active={number + 1 === currentPage}
-                onClick={() => paginate(number + 1)}
-              >
-                {number + 1}
-              </Pagination.Item>
-            )
-          )}
-        </Pagination>
       </div>
     </>
   );

@@ -90,6 +90,8 @@ function Data_siswa() {
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
 
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   // Handle search term change
   const handleSearchChange = (value) => {
     setSearchTerm(value);
@@ -128,9 +130,12 @@ function Data_siswa() {
         </Row>
         <div
           className="table-responsive"
-          style={{ marginTop: "8px", marginLeft: "20px" }}
+          style={{
+            boxShadow:
+              "0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.19)",
+          }}          
         >
-          <Table striped bordered hover>
+          <table id="keywords" className="table">
             <thead>
               <tr>
                 <th>No</th>
@@ -198,20 +203,31 @@ function Data_siswa() {
                 </tr>
               ))}
             </tbody>
-          </Table>
+          </table>
         </div>
+
+        <br />
         <Pagination>
-          {[
-            ...Array(Math.ceil(filteredUsers.length / usersPerPage)).keys(),
-          ].map((number) => (
-            <Pagination.Item
-              key={number + 1}
-              active={number + 1 === currentPage}
-              onClick={() => setCurrentPage(number + 1)}
-            >
-              {number + 1}
-            </Pagination.Item>
-          ))}
+          <Pagination.Prev
+            onClick={() => paginate(currentPage - 1)}
+            disabled={currentPage === 1}
+          />
+          {Array.from(
+            { length: Math.ceil(users.length / usersPerPage) },
+            (_, i) => (
+              <Pagination.Item
+                key={i + 1}
+                active={i + 1 === currentPage}
+                onClick={() => paginate(i + 1)}
+              >
+                {i + 1}
+              </Pagination.Item>
+            )
+          )}
+          <Pagination.Next
+            onClick={() => paginate(currentPage + 1)}
+            disabled={currentPage === Math.ceil(users.length / usersPerPage)}
+          />
         </Pagination>
       </div>
     </>

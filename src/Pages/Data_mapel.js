@@ -93,7 +93,7 @@ function Data_mapel() {
     <>
       <Navbarcom />
       <div style={{ padding: "50px", marginTop: "10%" }}>
-        <h1 style={{ marginBottom: "4%" }}> Tabel Data Mapel</h1>
+        <h1 style={{ marginBottom: "4%" }}>Tabel Data Mapel</h1>
         <Row>
           <Col md={4}>
             <Form.Group
@@ -111,89 +111,74 @@ function Data_mapel() {
           <Col md={8} className="text-right">
             <a
               href="/tambah_mapel"
-              className="btn btn-primary" // Use Bootstrap primary button class
-              style={{
-                textDecoration: "none", // Remove underline from link
-                color: "white", // Set text color to white for visibility
-                display: "inline-flex", // Align items in a flex container
-                alignItems: "center", // Center items vertically
-                justifyContent: "center", // Center items horizontally
-                padding: "0.375rem 0.75rem", // Adjust padding to match Bootstrap buttons
-                fontSize: "1.5rem", // Adjust font size to match Bootstrap buttons
-                lineHeight: 1.8, // Adjust line height to match Bootstrap buttons
-                borderRadius: "0.25rem", // Set border radius to match Bootstrap buttons
-              }}
+              className="btn btn-primary"
+              style={{ textDecoration: "none", color: "white" }}
             >
               <FontAwesomeIcon icon={faPlus} />
-            </a>{" "}
+            </a>
           </Col>
         </Row>
-        <Table
-          striped
-          bordered
-          hover
-          style={{
-            marginTop: "8px",
-            marginLeft: "20px",
-            width: "calc(95% - 10px)",
-          }}
+        <div
+          className="table-responsive" id="wrapper"
+          style={{ marginTop: "8px", marginLeft: "20px" }}
         >
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Nama Guru Mapel</th>
-              <th>Nama Mapel</th>
-              {/* Tambahkan kolom lain di sini sesuai kebutuhan */}
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentMapel.map((item, index) => (
-              <tr key={item.id}>
-                <td>{(currentPage - 1) * mapelPerPage + index + 1}</td>
-                <td>{item.nama_guru_mapel}</td>
-                <td>{item.nama_mapel}</td>
-                {/* Tambahkan kolom lain di sini sesuai kebutuhan */}
-                <td style={{ display: "flex", gap: "1px", marginRight: "" }}>
-                  <a
-                    href={`/update_mapel/${item.id}`} // Perbaikan di sini
-                    className="btn btn-success" // Use Bootstrap button classes
-                    style={{
-                      textDecoration: "none", // Remove underline from link
-                      color: "white", // Set text (icon) color
-                      display: "inline-flex", // Use flex to align icon and text
-                      alignItems: "center", // Center items vertically
-                      justifyContent: "center", // Center items horizontally
-                      padding: "0.375rem 0.75rem", // Bootstrap button padding
-                      fontSize: "1rem", // Font size to match Bootstrap buttons
-                      lineHeight: 1.5, // Line height to match Bootstrap buttons
-                      borderRadius: "0.25rem", // Border radius to match Bootstrap buttons
-                    }}
-                  >
-                    <FontAwesomeIcon
-                      icon={faPenSquare}
-                      style={{ marginRight: "2px" }}
-                    />
-                  </a>
-                  <Button
-                    variant="danger"
-                    onClick={() => handleDelete(item.id)}
-                    style={{
-                      border: "10%",
-                      borderRadius: "10%",
-                      color: "white",
-                    }}
-                  >
-                    <FontAwesomeIcon
-                      icon={faTrashAlt}
-                      style={{ marginRight: "2px" }}
-                    />
-                  </Button>
-                </td>
+          <table cellSpacing="0" cellPadding="0" id="keywords">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama Guru Mapel</th>
+                <th>Nama Mapel</th>
+                <th>Aksi</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {currentMapel.map((item, index) => (
+                <tr key={item.id}>
+                  <td>{(currentPage - 1) * mapelPerPage + index + 1}</td>
+                  <td>{item.nama_guru_mapel}</td>
+                  <td>{item.nama_mapel}</td>
+                  <td style={{ display: "flex", gap: "10px" }}>
+                    <a
+                      href={`/update_mapel/${item.id}`}
+                      className="btn btn-success"
+                      style={{
+                        textDecoration: "none",
+                        color: "white",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        padding: "0.375rem 0.75rem",
+                        fontSize: "1rem",
+                        lineHeight: 1.5,
+                        borderRadius: "0.25rem",
+                      }}
+                    >
+                      <FontAwesomeIcon
+                        icon={faPenSquare}
+                        style={{ marginRight: "2px" }}
+                      />
+                    </a>
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDelete(item.id)}
+                      style={{
+                        border: "none",
+                        borderRadius: "0.25rem",
+                        color: "white",
+                      }}
+                    >
+                      <FontAwesomeIcon
+                        icon={faTrashAlt}
+                        style={{ marginRight: "2px" }}
+                      />
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <br />
         <Pagination>
           <Pagination.Prev
             onClick={() => paginate(currentPage - 1)}

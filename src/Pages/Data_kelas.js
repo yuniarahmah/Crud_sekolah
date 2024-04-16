@@ -102,121 +102,118 @@ function Data_kelas() {
     <>
       <Navbarcom />
       <div style={{ padding: "50px", marginTop: "10%" }}>
-        <h1 style={{ marginBottom: "4%" }}> Tabel Data Kelas</h1>
-        <Row>
-          <Col md={4}>
-            <Form.Group
-              controlId="formSearch"
-              style={{ marginLeft: "5%", marginBottom: "2%" }}
-            >
-              <Form.Control
-                type="text"
-                placeholder="Search"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </Form.Group>
-          </Col>
-          <Col md={8} className="text-right">
-            <a
-              href="/tambahkelas"
-              className="btn btn-primary" // Use Bootstrap primary button class
-              style={{
-                textDecoration: "none", // Remove underline from link
-                color: "white", // Set text color to white for visibility
-                display: "inline-flex", // Align items in a flex container
-                alignItems: "center", // Center items vertically
-                justifyContent: "center", // Center items horizontally
-                padding: "0.375rem 0.75rem", // Adjust padding to match Bootstrap buttons
-                fontSize: "1.5rem", // Adjust font size to match Bootstrap buttons
-                lineHeight: 1.8, // Adjust line height to match Bootstrap buttons
-                borderRadius: "0.25rem", // Set border radius to match Bootstrap buttons
-              }}
-            >
-              <FontAwesomeIcon icon={faPlus} />
-            </a>{" "}
-          </Col>
-        </Row>
-        <Table
-          striped
-          bordered
-          hover
-          style={{
-            marginTop: "8px",
-            marginLeft: "20px",
-            width: "calc(95% - 10px)",
-          }}
+  <h1 style={{ marginBottom: "4%" }}>Tabel Data Kelas</h1>
+  <Row>
+    <Col md={4}>
+      <Form.Group
+        controlId="formSearch"
+        style={{ marginLeft: "5%", marginBottom: "2%" }}
+      >
+        <Form.Control
+          type="text"
+          placeholder="Search"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </Form.Group>
+    </Col>
+    <Col md={8} className="text-right">
+      <a
+        href="/tambahkelas"
+        className="btn btn-primary"
+        style={{ textDecoration: "none", color: "white" }}
+      >
+        <FontAwesomeIcon icon={faPlus} />
+      </a>
+    </Col>
+  </Row>
+  <div
+    className="table-responsive"
+    id="wrapper"
+    style={{ marginTop: "8px", marginLeft: "20px" }}
+  >
+    <table id="keywords" cellSpacing="0" cellPadding="0">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama Jurusan</th>
+          <th>Nama Kelas</th>
+          <th>Wali Kelas</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {currentkelas.map((kelas, index) => (
+          <tr key={kelas.id}>
+            <td>{index + 1 + (currentPage - 1) * kelasPerPage}</td>
+            <td>{kelas.namaJurusan}</td>
+            <td>{kelas.namaKelas}</td>
+            <td>{kelas.waliKelas}</td>
+            <td style={{ display: "flex", gap: "10px" }}>
+              <a
+                href={`/update_kelas/${kelas.id}`}
+                className="btn btn-success"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "0.375rem 0.75rem",
+                  fontSize: "1rem",
+                  lineHeight: 1.5,
+                  borderRadius: "0.25rem",
+                }}
+              >
+                <FontAwesomeIcon
+                  icon={faPenSquare}
+                  style={{ marginRight: "2px" }}
+                />
+              </a>
+              <Button
+                variant="danger"
+                onClick={() => handleDelete(kelas.id)}
+                style={{
+                  border: "none",
+                  borderRadius: "0.25rem",
+                  color: "white",
+                }}
+              >
+                <FontAwesomeIcon
+                  icon={faTrashAlt}
+                  style={{ marginRight: "2px" }}
+                />
+              </Button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <Pagination>
+    <Pagination.Prev
+      onClick={() => paginate(currentPage - 1)}
+      disabled={currentPage === 1}
+    />
+    {Array.from(
+      { length: Math.ceil(filteredKelas.length / kelasPerPage) },
+      (_, i) => (
+        <Pagination.Item
+          key={i + 1}
+          active={i + 1 === currentPage}
+          onClick={() => paginate(i + 1)}
         >
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Nama Jurusan</th>
-              <th>nama Kelas</th>
-              <th>Wali Kelas</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentkelas.map((kelas, index) => (
-              <tr key={kelas.id}>
-                <td>{index + 1}</td>
-                <td>{kelas.namaJurusan}</td>
-                <td>{kelas.namaKelas}</td>
-                <td>{kelas.waliKelas}</td>
-                <td style={{ display: "flex", gap: "1px", marginRight: "" }}>
-                  <a
-                    href={`/update_kelas/${kelas.id}`} // Perbaikan di sini
-                    className="btn btn-success" // Use Bootstrap button classes
-                    style={{
-                      textDecoration: "none", // Remove underline from link
-                      color: "white", // Set text (icon) color
-                      display: "inline-flex", // Use flex to align icon and text
-                      alignItems: "center", // Center items vertically
-                      justifyContent: "center", // Center items horizontally
-                      padding: "0.375rem 0.75rem", // Bootstrap button padding
-                      fontSize: "1rem", // Font size to match Bootstrap buttons
-                      lineHeight: 1.5, // Line height to match Bootstrap buttons
-                      borderRadius: "0.25rem", // Border radius to match Bootstrap buttons
-                    }}
-                  >
-                    <FontAwesomeIcon
-                      icon={faPenSquare}
-                      style={{ marginRight: "2px" }}
-                    />
-                  </a>
-                  <Button
-                    variant="danger"
-                    onClick={() => handleDelete(kelas.id)}
-                    style={{
-                      border: "10%",
-                      borderRadius: "10%",
-                      color: "white",
-                    }}
-                  >
-                    <FontAwesomeIcon
-                      icon={faTrashAlt}
-                      style={{ marginRight: "2px" }}
-                    />
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-        <Pagination>
-          {[
-            ...Array(Math.ceil(filteredKelas.length / kelasPerPage)).keys(),
-          ].map((number) => (
-            <Pagination.Item
-              key={number + 1}
-              active={number + 1 === currentPage}
-              onClick={() => paginate(number + 1)}
-            >
-              {number + 1}
-            </Pagination.Item>
-          ))}
-        </Pagination>
-      </div>
+          {i + 1}
+        </Pagination.Item>
+      )
+    )}
+    <Pagination.Next
+      onClick={() => paginate(currentPage + 1)}
+      disabled={currentPage === Math.ceil(filteredKelas.length / kelasPerPage)}
+    />
+  </Pagination>
+</div>
+
     </>
   );
 }

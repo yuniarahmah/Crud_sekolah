@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import logo from "../asset/Background.jpg"; // Pastikan jalur benar
-import Navbarcom from "../Component/Navbar";
+// import Navbarcom from "../Component/Navbar";
 // Import gambar yang digunakan di kartu
 import foto1 from "../asset/foto.jpg"; // Perbarui jalur sesuai kebutuhan
 import foto2 from "../asset/foto2.webp"; // Perbarui jalur sesuai kebutuhan
@@ -54,7 +54,7 @@ function Home() {
             <b>
               {" "}
               <i>
-                Ayo Kepoin Sekolah Smk Binusa yuk, Gurunya seru seru dn banyak{" "}
+                Ayo Kepoin Sekolah Smk Binusa, Gurunya seru seru dn banyak{" "}
                 <br />
                 kegiatan menarik yang sering diadakan loh, ayo segera gabung
                 lewat web kami <br />

@@ -12,7 +12,7 @@ import {
 const apiUrl = "http://localhost:8080";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false); // State baru untuk kontrol tampilan password
@@ -33,11 +33,11 @@ const Login = () => {
 
         // Menampilkan alert tanpa tombol konfirmasi dan mengatur timer
         Swal.fire({
-          icon: "success",
-          title: "Login Successful",
-          html: `Token: ${token}`,
-          showConfirmButton: false,
-          timer: 1500, // Alert akan hilang setelah 1.5 detik
+          icon: "success", // Menampilkan ikon keberhasilan
+          title: "Login berhasil",
+          html: "Selamat, login Anda berhasil!", // Teks pesan keberhasilan
+          showConfirmButton: false, // Menonaktifkan tombol konfirmasi
+          timer: 1500, // SweetAlert akan hilang setelah 1.5 detik
         }).then(() => {
           // Pengalihan ke halaman dashboard setelah alert hilang
           window.location.href = "/siswa";

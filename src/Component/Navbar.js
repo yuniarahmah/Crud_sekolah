@@ -102,26 +102,39 @@ function Navbarcom() {
                 <li
                   className={`nav-item ${isActive("/siswa") ? "active" : ""}`}
                 >
-                  <a href="/siswa" className="nav-link">
+                  <a
+                    href="/siswa"
+                    className={`nav-link ${isActive("/siswa") ? "active" : ""}`}
+                  >
                     <FontAwesomeIcon icon={faUser} /> Murid
                   </a>
                 </li>
+
                 <li className={`nav-item ${isActive("/guru") ? "active" : ""}`}>
-                  <a href="/guru" className="nav-link">
+                  <a
+                    href="/guru"
+                    className={`nav-link ${isActive("/guru") ? "active" : ""}`}
+                  >
                     <FontAwesomeIcon icon={faUserTie} /> Guru
                   </a>
                 </li>
                 <li
                   className={`nav-item ${isActive("/kelas") ? "active" : ""}`}
                 >
-                  <a href="/kelas" className="nav-link">
+                  <a
+                    href="/kelas"
+                    className={`nav-link ${isActive("/kelas") ? "active" : ""}`}
+                  >
                     <FontAwesomeIcon icon={faPeopleRoof} /> Kelas
                   </a>
                 </li>
                 <li
                   className={`nav-item ${isActive("/mapel") ? "active" : ""}`}
                 >
-                  <a href="/mapel" className="nav-link">
+                  <a
+                    href="/mapel"
+                    className={`nav-link ${isActive("/mapel") ? "active" : ""}`}
+                  >
                     <FontAwesomeIcon icon={faPaste} /> Mapel
                   </a>
                 </li>
